@@ -1,0 +1,123 @@
+body, ul {
+  font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Navigation bar styles */
+  .navbar {
+    background-color: #5356FF;
+    overflow: hidden;
+  }
+  
+
+  .navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .navbar li {
+    float: left;
+  }
+
+  .navbar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  input[type="submit"] {
+    font-size: medium;
+    font-family: Arial, sans-serif;
+    background-color: #5356FF;
+    color: #fff;
+    padding: 14px 16px;
+    border: none;
+    border-radius: none;
+    cursor: pointer;
+  }
+  input[type="submit"]:hover {
+    width: 100%;
+    background-color: #555;
+    color: #fff;
+    padding: 14px 16px;
+    border: none;
+    border-radius: none;
+    cursor: pointer;
+  }
+  .navbar li a.active {
+    color: white;
+    background-color: #555;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  /* Change color on hover */
+  .navbar li a:hover {
+    background-color: #555;
+  }
+  .navbar .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    min-width: 160px;
+    z-index: 1;
+  }
+
+  .navbar .dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+
+  /* Show the dropdown menu on hover */
+  .navbar li:hover .dropdown-content {
+    display: block;
+  }
+
+  .error-message {
+    text-align: center;
+    background-color: #f8d7da; /* Background color */
+    color: #721c24; /* Text color */
+    padding: 10px; /* Padding around the text */
+    border: 1px solid #f5c6cb; /* Border color */
+    border-radius: 5px; /* Rounded corners */
+    margin-bottom: 10px; /* Margin at the bottom */
+  }
+
+  .dropbtn-user{
+    background-color: #5356FF;
+    color: white;
+    padding: 14px 16px;
+
+    font-size: medium;
+    border: none;
+  }
+  .dropdown-content-user {
+    display: none;
+    position: fixed;
+    background-color: #333;
+    min-width: 160px;
+    z-index: 1;
+  }
+
+  .dropdown-content-user a {
+    color: white;
+    padding: 12px 16px 20px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+
+  /* Show the dropdown menu on hover */
+   li:hover .dropdown-content-user {
+    display: block;
+  }
+  

@@ -1,0 +1,28 @@
+<%- include('../includes/head');  %>
+<link rel="stylesheet" href="/css/navBarCss.css">
+<link rel="stylesheet" href="/css/product.css">
+
+</head>
+<body>
+<%- include('../includes/nav-bar');  %>
+<main>
+    <% if(favorites.length > 0){ %>
+    <% for (let favorite of favorites) { %>
+        <div class="container">
+        <h2>Products</h2>
+        <div class="product-list">
+          <div class="product">
+            <img src="product1.jpg" alt="Product 1">
+            <h3>Product 1</h3>
+            <p>$19.99</p>
+            <button>Add to Cart</button>
+          </div>
+          <!-- Add more product items as needed -->
+        </div>
+    <% } %>
+        <% } %>
+        </div>
+</main>
+
+</body>
+</html
