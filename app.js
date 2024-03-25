@@ -13,6 +13,7 @@ const FavoriteItem = require('./models/favorite-item');
 
 const mainPageRoutes = require('./routes/main-page');
 const authRoutes = require('./routes/auth-page');
+const userRoutes = require('./routes/user-page');
 
 
 const app = express();
@@ -25,9 +26,6 @@ const store = new MySqlStore({
 });
 
 
-
-
-
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
@@ -37,7 +35,6 @@ app.use(session({secret: 'oto-expo-databese', resave: false, saveUninitialized: 
 app.use(flash());
 
 app.use((req, res, next) => {
-   
     async function init(){
         try {
             if(req.session.user){
@@ -55,6 +52,7 @@ app.use((req, res, next) => {
 
 app.use(mainPageRoutes);
 app.use(authRoutes);
+app.use(userRoutes);
 
 
 Products.belongsTo(User, {constraints: true, onDelete: 'CASCADE'});
@@ -75,10 +73,5 @@ async function  init() {
     }
 }
 init();
-
-
-
-
-
 
 app.listen(3000);

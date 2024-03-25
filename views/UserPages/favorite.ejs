@@ -6,6 +6,7 @@
 <body>
 <%- include('../includes/nav-bar');  %>
 <main>
+  
     <% if(favorites.length > 0){ %>
     <% for (let favorite of favorites) { %>
         <div class="container">
@@ -20,6 +21,8 @@
           <!-- Add more product items as needed -->
         </div>
     <% } %>
+        <% } else{ %>
+        <h2>Added no favorites yet</h2>
         <% } %>
         </div>
 </main>

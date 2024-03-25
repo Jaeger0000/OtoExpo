@@ -9,7 +9,7 @@ exports.getSignup = (req, res, next) => {
         errormsg = null;
     }
     
-    res.render('MainPages/signup', { 
+    res.render('AuthPages/signup', { 
         path: '/signup',
         error: errormsg
     });
@@ -22,7 +22,6 @@ exports.postSignup = (req, res, next) => {
     const cfrmPassword = req.body.cfrmPassword;
     if (password !== cfrmPassword) {
         req.flash('error', 'Passwords do not match');
-        
         return res.redirect('/signup');
     }
     async function userCmpr() {
@@ -61,7 +60,7 @@ exports.getLogin = (req, res, next) => {
         errormsg = null;
     }
     
-    res.render('MainPages/login', { path: '/login',
+    res.render('AuthPages/login', { path: '/login',
     error: errormsg });
 }
 
@@ -82,7 +81,7 @@ exports.postLogin = (req, res, next) => {
                 return res.redirect('/login');
             }
             req.session.user = user;
-            req.session.isLoggedIn = true;
+            req.session.isLoggedIn =await true;
             return res.redirect('/');
         } catch (error) {
             console.log(error);
