@@ -1,37 +1,53 @@
-# Project Name
+# Oto Expo Car Sale
 
-[OtoExpo the car sale website.]
-
-## Table of Contents
-- [The new car type car sale website. ](#about)
-- [Installation](#installation)
-- [NodeJs, Html, Css, View Engine: EJS](#usage)
-- [Oğuzhan Ceviz, Hüseyin Dönmez, Mustafa Bağlam, Hüseyin Berk Emir, Nisa Arvas](#contributing)
-- [1.0.0](#license)
-
-## About
-[The Oto Expo Car Sale website is a platform dedicated to facilitating the buying and selling of both new and used cars. It serves as a marketplace where car dealerships, individual sellers, and prospective buyers can connect and transact conveniently.]
+The Oto Expo Car Sale website is a platform dedicated to facilitating the buying and selling of both new and used cars. It serves as a marketplace where car dealerships, individual sellers, and prospective buyers can connect and transact conveniently.
 
 ## Installation
-[npm install 
-npm start]
+
+To run the project locally, follow these steps:
+
+1. Install dependencies:
+--- npm install
+
+
+2. Start the development server:
+--- npm start
+
+
+3. Access the website at [http://localhost:3000/](http://localhost:3000/).
 
 ## Usage
-[Just start with npm start after that you can use http://localhost:3000/ domain.]
+
+Simply run `npm start` to start the server, then navigate to [http://localhost:3000/](http://localhost:3000/) in your web browser to access the Oto Expo Car Sale website.
 
 ## Contributing
-[Frontend: Hüseyin Dönmez
-Frontend: Hüseyin Berk Emir
-Backend: Oğuzhan Ceviz
-Backend: Mustafa Bağlam
-Design and documentation: Nisa Arvas]
+
+Contributions to this project are welcome! The team members involved in the development are:
+
+- Frontend:
+- Hüseyin Dönmez
+- Hüseyin Berk Emir
+
+- Backend:
+- Oğuzhan Ceviz
+- Mustafa Bağlam
+
+- Design and documentation:
+- Nisa Arvas
+
+Please follow the project's coding standards and conventions when contributing.
 
 ## License
-[Licenced by WebBuilders]
+
+This project is licensed by WebBuilders. See the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgements
-[Project For Comp202 and Comp204 lesson. ]
+
+This project was developed for the Comp202 and Comp204 lessons.
 
 ## Support
-[NodeJs Documentation and Html, Css , EJS Documantations]
 
+For support, refer to the documentation provided:
+
+- Node.js Documentation
+- HTML, CSS, and EJS Documentation
