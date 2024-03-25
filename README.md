@@ -24,17 +24,17 @@ Simply run `npm start` to start the server, then navigate to [http://localhost:3
 
 Contributions to this project are welcome! The team members involved in the development are:
 
-- Frontend:
-- Hüseyin Dönmez
-- Hüseyin Berk Emir
-
-- Backend:
+- Frontend:<br>
+- Hüseyin Dönmez<br>
+- Hüseyin Berk Emir<br>
+  <hr>
+- Backend:<br>
 - Oğuzhan Ceviz
 - Mustafa Bağlam
-
+  <hr>
 - Design and documentation:
-- Nisa Arvas
-
+- Nisa Arvas<br>
+<br>
 Please follow the project's coding standards and conventions when contributing.
 
 ## License
