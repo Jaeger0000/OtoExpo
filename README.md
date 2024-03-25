@@ -7,11 +7,11 @@ The Oto Expo Car Sale website is a platform dedicated to facilitating the buying
 To run the project locally, follow these steps:
 
 1. Install dependencies:
---- npm install
+`npm install`
 
 
 2. Start the development server:
---- npm start
+`npm start`
 
 
 3. Access the website at [http://localhost:3000/](http://localhost:3000/).
