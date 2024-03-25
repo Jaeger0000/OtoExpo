@@ -6,11 +6,7 @@
 - [The new car type car sale website. ](#about)
 - [npm install - npm start](#installation)
 - [NodeJs, Html, Css, View Engine: EJS](#usage)
-- [Oğuzhan Ceviz
-- Hüseyin Dönmez
-- Mustafa Bağlam
-- Hüseyin Berk Emir
-- Nisa Arvas](#contributing)
+- [Oğuzhan Ceviz, Hüseyin Dönmez, Mustafa Bağlam, Hüseyin Berk Emir, Nisa Arvas](#contributing)
 - [1.0.0](#license)
 
 ## About
