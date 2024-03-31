@@ -6,4 +6,5 @@ const userController = require('../controllers/user-controller');
 router.get('/favorite',userController.getFavorite);
 
 
+
 module.exports = router;

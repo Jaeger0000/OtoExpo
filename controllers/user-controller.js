@@ -16,16 +16,16 @@ exports.getFavorite = (req, res, next) => {
             const user = await User.findByPk(req.session.user.id);
             const favorite = await user.getFavorite();
             const products = await favorite.getProducts();
-            console.log('şuan  favoritee egettesdssssssdsdsr');
             res.render('UserPages/favorite',{
                 path:'/favorite',
                 error: errormsg,
                 favorites: products
             });
-            console.log('şuan  favoritee egettesdssssssdsdsr');
+           
         } catch (error) {
             console.log(error);
         }
     }
     init();
 }
+

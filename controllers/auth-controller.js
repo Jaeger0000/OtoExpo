@@ -8,8 +8,8 @@ exports.getSignup = (req, res, next) => {
     } else {
         errormsg = null;
     }
-    
-    res.render('AuthPages/signup', { 
+
+    res.render('AuthPages/signup', {
         path: '/signup',
         error: errormsg
     });
@@ -21,18 +21,20 @@ exports.postSignup = (req, res, next) => {
     const password = req.body.password;
     const cfrmPassword = req.body.cfrmPassword;
     if (password !== cfrmPassword) {
-        req.flash('error', 'Passwords do not match');
+        req.flash('error', 
+        'Passwords do not match');
         return res.redirect('/signup');
     }
     async function userCmpr() {
-        const existsUser =await User.findOne({where: {email: email}});
+        const existsUser = await User.findOne({ where: { email: email } });
         if (existsUser) {
-            req.flash('error', 'Email already exists. Please enter a different email address');
+            req.flash('error',
+            'Email already exists. Please enter a different email address');
             return res.redirect('/signup');
         }
     }
-    userCmpr();    
-    async function userCreate(){
+    userCmpr();
+    async function userCreate() {
         try {
             const passwordcrypt = bcrypt.hashSync(password, 12);
             const user = await User.create({
@@ -43,13 +45,13 @@ exports.postSignup = (req, res, next) => {
             });
             await user.save();
             await user.createFavorite();
-            
+            res.redirect('/login');
         } catch (error) {
             console.log(error);
         }
     }
     userCreate();
-    res.redirect('/login');
+    
 }
 
 exports.getLogin = (req, res, next) => {
@@ -59,35 +61,39 @@ exports.getLogin = (req, res, next) => {
     } else {
         errormsg = null;
     }
-    
-    res.render('AuthPages/login', { path: '/login',
-    error: errormsg });
+
+    res.render('AuthPages/login', {
+        path: '/login',
+        error: errormsg
+    });
 }
 
 exports.postLogin = (req, res, next) => {
-    const email = req.body.email;
-    const password = req.body.password;
-    
-    async function compareUser(){
+    async function compareUser() {
         try {
-            const user = await User.findOne({where: {email: email}});
-            if(!user){
+            const email = req.body.email;
+            const password = req.body.password;
+
+            const user = await User.findOne({ where: { email: email } });
+
+            if (!user) {
                 req.flash('error', "The entered email not exists");
                 return res.redirect('/login');
             }
             const isEqual = await bcrypt.compare(password, user.password);
-            if(!isEqual){
+            if (!isEqual) {
                 req.flash('error', "The entered password is incorrect");
                 return res.redirect('/login');
             }
             req.session.user = user;
-            req.session.isLoggedIn =await true;
-            return res.redirect('/');
+            req.session.isLoggedIn = true;
+            res.redirect('/');
         } catch (error) {
             console.log(error);
         }
     }
     compareUser();
+    
 }
 
 exports.postLogout = (req, res, next) => {
