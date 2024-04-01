@@ -30,7 +30,7 @@ const Cars = sequelize.define("cars", {
     allowNull: false,
   },
   car_color: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false,
   },
   price: {

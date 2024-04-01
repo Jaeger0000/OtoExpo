@@ -6,7 +6,7 @@ body, ul {
 
   /* Navigation bar styles */
   .navbar {
-    background-color: #5356FF;
+    background-color: black;
     overflow: hidden;
   }
   
@@ -26,16 +26,24 @@ body, ul {
     display: block;
     color: white;
     text-align: center;
-    padding: 14px 16px;
+    padding: 20px 25px;
     text-decoration: none;
   }
+ 
+  .otoExpo-main{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none; 
+  } 
   
   input[type="submit"] {
     font-size: medium;
     font-family: Arial, sans-serif;
-    background-color: #5356FF;
+    background-color: black;
     color: #fff;
-    padding: 14px 16px;
+    padding: 20px 25px;
     border: none;
     border-radius: none;
     cursor: pointer;
@@ -44,7 +52,7 @@ body, ul {
     width: 100%;
     background-color: #555;
     color: #fff;
-    padding: 14px 16px;
+    padding: 20px 25px;
     border: none;
     border-radius: none;
     cursor: pointer;
@@ -53,7 +61,7 @@ body, ul {
     color: white;
     background-color: #555;
     text-align: center;
-    padding: 14px 16px;
+    padding: 20px 25px;
     text-decoration: none;
   }
 
@@ -93,10 +101,9 @@ body, ul {
   }
 
   .dropbtn-user{
-    background-color: #5356FF;
+    background-color: black;
     color: white;
     padding: 14px 16px;
-
     font-size: medium;
     border: none;
   }
@@ -120,4 +127,22 @@ body, ul {
    li:hover .dropdown-content-user {
     display: block;
   }
+
+
+
+  .logo {
+    width: 120px; /* Logo genişliği */
+    height: 60px; /* Logo yüksekliği */
+    background-image: url('../images/logo.jpg'); /* Logo resmi */
+    background-size: contain; /* Resmi div boyutuna uygun şekilde boyutlandır */
+    background-repeat: no-repeat; /* Resmi tekrar etme */
+}
+
+.user-name-size{
+  font-size: 20px;
+  color: white;
+  padding: 14px 16px;
+  text-align: center;
+  text-decoration: none;
+}
   

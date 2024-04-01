@@ -1,7 +1,12 @@
 <nav>
 <div class="navbar">
   <ul>
+    <!-- <li><h1 class="otoExpo-main">OtoExpo</h1></li> -->
+    <li>
+      <div class="logo"></div>
+    </li>
     <li><a href="/" class="<%= path==='/' ? 'active': '' %>">Home</a></li>
+
     <li><a href="/products" class="<%= path==='/products' ? 'active': '' %>">Products</a></li>
     <li class="dropdown">
     <a href="/categories" class="dropbtn">Categories</a>
@@ -16,9 +21,9 @@
       <% if(isAuthenticated){ %>
     <li><a href="/favorite">Favorites</a></li>
     <li><a href="/add-product">Add Products</a></li>
-    <li style="float:right"><form action="/logout" method="post"> <input type="submit" value="Log Out"></form></li>
+    <li style="float:right"><form action="/logout" method="post" > <input type="submit" value="Log Out"></form></li>
     <li style="float:right" class="dropdown">
-      <a class="dropbtn-user"><%= user.name %></a>
+      <a class="dropbtn-user user-name-size"><%= user.name %></a>
         <div class="dropdown-content-user">
           <a href="/categories/cars">Cars</a>
           <a href="/categories/motorcycles">Motorcycles</a>

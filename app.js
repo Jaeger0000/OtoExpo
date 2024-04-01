@@ -12,6 +12,10 @@ const User = require('./models/user');
 const Favorite = require('./models/favorite');
 const FavoriteItem = require('./models/favorite-item');
 const Cars = require('./models/cars');
+const Motorcycle = require('./models/motorcycle');
+const Building = require('./models/building');
+
+
 
 const mainPageRoutes = require('./routes/main-page');
 const authRoutes = require('./routes/auth-page');
@@ -49,18 +53,35 @@ app.use((req, res, next) => {
     init();
 });
 
+
 app.use(mainPageRoutes);
 app.use(authRoutes);
 app.use(userRoutes);
+app.use(addProductRoutes);
+app.use((req, res, next) => {
+    res.status(404).render('MainPages/404', { pageTitle: 'Page Not Found',path: '/404' });
+});
 
 
 Cars.belongsTo(User, {constraints: true, onDelete: 'CASCADE'});
+Motorcycle.belongsTo(User, {constraints: true, onDelete: 'CASCADE'});
+Building.belongsTo(User, {constraints: true, onDelete: 'CASCADE'});
+
 User.hasMany(Cars);
+User.hasMany(Motorcycle);
+User.hasMany(Building);
 
 User.hasOne(Favorite);
 Favorite.belongsTo(User);
+
 Cars.belongsToMany(Favorite , {through: FavoriteItem});
 Favorite.hasMany(Cars);
+
+Motorcycle.belongsToMany(Favorite , {through: FavoriteItem});
+Favorite.hasMany(Motorcycle);
+
+Building.belongsToMany(Favorite , {through: FavoriteItem});
+Favorite.hasMany(Building);
 
 
 

@@ -14,25 +14,28 @@ const Motorcycle = sequelize.define("motorcycle", {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  price: {
-    type: Sequelize.DOUBLE,
+  motorcycle_marka: {
+    type: Sequelize.STRING,
     allowNull: false,
   },
-  year: {
+  motorcycle_model: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  production_year: {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
-  brand: {
+  kilometer: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+  },
+  motorcycle_color: {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  model: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
- 
-  color: {
-    type: Sequelize.STRING,
+  price: {
+    type: Sequelize.DOUBLE,
     allowNull: false,
   },
   imageUrl: {
