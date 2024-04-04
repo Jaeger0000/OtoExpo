@@ -17,6 +17,7 @@
     <input type="email" name="email" placeholder="Email" required>
     <input type="password" name="password" placeholder="Password" required>
     <input type="password" name="cfrmPassword" placeholder="Confirm Password" required>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
     <input type="submit" value="Signup">
   </form>
   <div class="text-center text-small">

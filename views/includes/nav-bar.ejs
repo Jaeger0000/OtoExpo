@@ -1,7 +1,6 @@
 <nav>
 <div class="navbar">
   <ul>
-    <!-- <li><h1 class="otoExpo-main">OtoExpo</h1></li> -->
     <li>
       <div class="logo"></div>
     </li>
@@ -21,15 +20,12 @@
       <% if(isAuthenticated){ %>
     <li><a href="/favorite">Favorites</a></li>
     <li><a href="/add-product">Add Products</a></li>
-    <li style="float:right"><form action="/logout" method="post" > <input type="submit" value="Log Out"></form></li>
-    <li style="float:right" class="dropdown">
-      <a class="dropbtn-user user-name-size"><%= user.name %></a>
-        <div class="dropdown-content-user">
-          <a href="/categories/cars">Cars</a>
-          <a href="/categories/motorcycles">Motorcycles</a>
-          <a href="/categories/buildings">Buildings</a>
-        </div>
-        </li>
+    <li style="float:right"><form action="/logout" method="post" >
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <input type="submit" value="Log Out"></form></li>
+    <li style="float:right">
+      <a class="" href="/user/<%= user.id %>/account"><%= user.name %></a>
+    </li>
     
     <% } else { %>
     <li style="float:right"><a href="/login" class="<%= path==='/login' ? 'active' : '' %>">Login</a></li>

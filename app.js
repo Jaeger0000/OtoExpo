@@ -5,8 +5,8 @@ const store = require('./util/session-store');
 const path = require('path');
 
 const session = require('express-session');
-
 const flash = require('connect-flash');
+const csrf  = require('csurf');
 
 const User = require('./models/user');
 const Favorite = require('./models/favorite');
@@ -28,6 +28,7 @@ const addProductRoutes = require('./routes/add-product');
 
 
 const app = express();
+const csrfProtection = csrf();
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -35,6 +36,7 @@ app.set('views', 'views');
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret: 'oto-expo-databese', resave: false, saveUninitialized: false, store: store}));
+app.use(csrfProtection);
 app.use(flash());
 
 app.use((req, res, next) => {
@@ -45,6 +47,7 @@ app.use((req, res, next) => {
                 res.locals.user = user;
             }
             res.locals.isAuthenticated = req.session.isLoggedIn;
+            res.locals.csrfToken = req.csrfToken();
             next();
         } catch (error) {
             console.log(error);
@@ -111,3 +114,16 @@ app.listen(3000);
 
 //   
 //data yazdırırken html olarak yazmlarını sağlama eklenecek
+
+// kullanıcı forgot password kısmı 
+// kullanıcı myproducts kısmı 
+// kullanıcı myproducts edit kkısmı 
+// kullanıcı myproducts delete kısmı
+// kullanıcı myproducts addcar addmotorcycle kısmı
+// kullanıcı myproducts addcar addmotorcycle backend kısmı
+// foto yükleme image kullanrak file kısmı 
+// home page düzenlenecek 
+// products detail kısmı eklenecek 
+// products add favorite backend kısmı 
+// products add favorite frontend kısmı
+// products categories kısmı düzenle
