@@ -1,37 +1,31 @@
-<%- include('../../includes/head');  %>
-<link rel="stylesheet" href="/css/navBarCss.css">
-<link rel="stylesheet" href="/css/product.css">
+<%- include('../../includes/head'); %>
+  <link rel="stylesheet" href="/css/navBarCss.css">
+  <link rel="stylesheet" href="/css/product.css">
 
-</head>
-<body>
-<%- include('../../includes/nav-bar');  %>
-    <h1> Bro</h1>
+  </head>
 
-<div class="container">
-  <h2>Products</h2>
-  <div class="product-list">
-    <div class="product">
-      <img src="product1.jpg" alt="Product 1">
-      <h3>Product 1</h3>
-      <p>$19.99</p>
-      <a href="/add-product/car">Add Car Page</a>
-    </div>
-    <div class="product">
-      <img src="product2.jpg" alt="Product 2">
-      <h3>Product 2</h3>
-      <p>$24.99</p>
-      <a href="add-product/motorcycle">Add Motorcycle Page</a>
-    </div>
-    <div class="product">
-      <img src="product3.jpg" alt="Product 3">
-      <h3>Product 3</h3>
-      <p>$14.99</p>
-      <a href="add-product/building">Add Building Page</a>
-    </div>
-    <!-- Add more product items as needed -->
-  </div>
-</div>
+  <body>
+    <%- include('../../includes/nav-bar'); %>
+      <h1></h1>
+
+      <div class="container">
+        <h2>Add Product Page</h2>
+        <div class="product-list">
+          <div class="product">
+
+            <a href="/add-product/car"><img src="images/addpcar.jpg" alt="Black Car Paper" class="addpcar-images"></a>
+            <h3>Car Product Page</h3>
+          </div>
+          <div class="product">
+            <a href="add-product/motorcycle"> <img src="images/addpbike-main.jpg" alt="Black motorcycle"
+                class="addpbike-images"></a>
+            <h3>MotorCycle Product Page</h3>
+          </div>
+
+        </div>
+      </div>
 
 
-</body>
-</html>
+  </body>
+
+  </html>

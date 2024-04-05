@@ -7,12 +7,18 @@
     
     <main>
         <div class="container-addproduct">
-            <h1 class="h1-addproduct">Add Car Listing</h1>
+            <h1 class="h1-addproduct">Add Car</h1>
+           
             <form class="form-addproduct" action="submit_listing.php" method="POST" enctype="multipart/form-data">
+                <div class="form-group-addproduct">
+                    <label for="name">Title:</label>
+                    <input class="inp-addproduct" type="text" id="name" name="name" required>
+                </div>
                 <div class="form-group-addproduct">
                     <label class="label-addproduct" for="make">Make:</label>
                     <input class="inp-addproduct" type="text" id="make" name="make" required>
                 </div>
+                
                 <div class="form-group-addproduct">
                     <label for="model">Model:</label>
                     <input class="inp-addproduct" type="text" id="model" name="model" required>
@@ -22,12 +28,16 @@
                     <input class="inp-addproduct" type="number" id="year" name="year" min="1900" max="2099" required>
                 </div>
                 <div class="form-group-addproduct">
-                    <label for="mileage">Mileage (in miles):</label>
-                    <input class="inp-addproduct" type="number" id="mileage" name="mileage" required>
+                    <label for="kilometer">Kilometer (km):</label>
+                    <input class="inp-addproduct" type="number" id="kilometer" name="kilometer" required>
                 </div>
                 <div class="form-group-addproduct">
-                    <label for="price">Price ($):</label>
+                    <label for="price">Price($):</label>
                     <input class="inp-addproduct" type="number" id="price" name="price" required>
+                </div>
+                <div class="form-group-addproduct">
+                    <label for="color">Color:</label>
+                    <input class="inp-addproduct" type="text" id="color" name="color" required>
                 </div>
                 <div class="form-group-addproduct">
                     <label for="description">Description:</label><br>

@@ -1,5 +1,5 @@
 const express = require('express');
-const sequelize = require('./util/database');
+
 const store = require('./util/session-store');
 
 const path = require('path');
@@ -9,13 +9,8 @@ const flash = require('connect-flash');
 const csrf  = require('csurf');
 
 const User = require('./models/user');
-const Favorite = require('./models/favorite');
-const FavoriteItem = require('./models/favorite-item');
-const Cars = require('./models/cars');
-const Motorcycle = require('./models/motorcycle');
-const Building = require('./models/building');
 
-
+const databeseConnection = require('./util/databese-connection');
 
 const mainPageRoutes = require('./routes/main-page');
 const authRoutes = require('./routes/auth-page');
@@ -66,38 +61,8 @@ app.use((req, res, next) => {
 });
 
 
-Cars.belongsTo(User, {constraints: true, onDelete: 'CASCADE'});
-Motorcycle.belongsTo(User, {constraints: true, onDelete: 'CASCADE'});
-Building.belongsTo(User, {constraints: true, onDelete: 'CASCADE'});
-
-User.hasMany(Cars);
-User.hasMany(Motorcycle);
-User.hasMany(Building);
-
-User.hasOne(Favorite);
-Favorite.belongsTo(User);
-
-Cars.belongsToMany(Favorite , {through: FavoriteItem});
-Favorite.hasMany(Cars);
-
-Motorcycle.belongsToMany(Favorite , {through: FavoriteItem});
-Favorite.hasMany(Motorcycle);
-
-Building.belongsToMany(Favorite , {through: FavoriteItem});
-Favorite.hasMany(Building);
-
-
-
-// sync the database and turn off logging
-
-async function  init() {
-    try {
-        await sequelize.sync();
-    } catch (error) {
-        console.log(error);
-    }
-}
-init();
+const dbconnect = databeseConnection;
+dbconnect;
 
 app.listen(3000);
 

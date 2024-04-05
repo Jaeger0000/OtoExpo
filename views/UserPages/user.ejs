@@ -1,42 +1,59 @@
-<%- include('../includes/head');  %>
-<link rel="stylesheet" href="/css/navBarCss.css">
-<link rel="stylesheet" href="/css/signup.css">
-<link rel="stylesheet" href="/css/userSetting.css">
+<%- include('../includes/head'); %>
+    <link rel="stylesheet" href="/css/navBarCss.css">
+    <link rel="stylesheet" href="/css/signup.css">
+    <link rel="stylesheet" href="/css/userSetting.css">
 
-</head>
-<body>
-<%- include('../includes/nav-bar');  %>
-<main>
-    <div class="container-left-navbar">
-        <nav class="navbar-left">
-            <ul>
-                <li><a class="navbar-left-a <%= path==='user/account' ? 'active': '' %>" href="/user/<%= user.id %>/account" >Account</a></li>
-                <li><a class="navbar-left-a" href="/user/<%= user.id %>/products">My Products</a></li>
-                <li><a class="navbar-left-a" href="/user/<%= user.id %>/help">Help</a></li>
-            </ul>
-        </nav>
-        <div class="content-left">
-            <!-- Sayfa içeriği buraya gelecek -->
-            <div class="container">
-                <% if(error){ %>
-                <h4 class="error-message"><%= error %></h4>
-                <%  } %>
-              <h2 class="signupH2">User Settings</h2>
-              <form action="/signup" method="post">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" value="<%= user.name %>" required>
-                <label for="name">Surname</label>
-                <input type="text" name="surName" value="<%= user.surName %>" required>
-                <label for="name">Email</label>
-                <input type="email" name="email" value="<%= user.email %>" required>
-                <input type="password" name="password" placeholder="Old Password" required>
-                <input type="password" name="password" placeholder="New Password" required>
-                <input type="password" name="cfrmPassword" placeholder="Confirm Password" required>
-                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                <input type="submit" value="Change User Settings">
-              </form>
-            </div>
-        </div>
-    
-</body>
-</html>
+    </head>
+
+    <body>
+        <%- include('../includes/nav-bar'); %>
+            <main>
+                <div class="container-left-navbar">
+                    <nav class="navbar-left">
+                        <ul>
+                            <li><a class="navbar-left-a <%= path==='user/account' ? 'active': '' %>"
+                                    href="/user/<%= user.id %>/account">Account</a></li>
+                            <li><a class="navbar-left-a" href="/user/<%= user.id %>/products">My Products</a></li>
+                            <li><a class="navbar-left-a" href="/user/<%= user.id %>/help">Help</a></li>
+                        </ul>
+                    </nav>
+                    <div class="content-left">
+                        <!-- Sayfa içeriği buraya gelecek -->
+                        <div class="container">
+                            <% if(error){ %>
+                                <h4 class="error-message">
+                                    <%= error %>
+                                </h4>
+                                <% } %>
+                                    <h2 class="signupH2">User Settings</h2>
+                                    <form action="/name-update" method="post">
+                                        <label for="name">Name : <%= user.name %></label>
+                                        <input type="text" id="name" name="name" required>
+                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                        <input type="submit" value="Change Name">
+                                    </form>
+                                    <form action="/surname-update" method="post">
+                                        <label for="name">Surname: <%= user.surName %></label>
+                                        <input type="text" name="surName" required>
+                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                        <input type="submit" value="Change Surname">
+                                    </form>
+                                    <form action="/email-update" method="post">
+                                        <label for="name">Email: <%= user.email %></label>
+                                        <input type="email" name="email"required>
+                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                        <input type="submit" value="Change Email">
+                                    </form>
+                                    <form action="/password-update" method="post">
+                                        <input type="password" name="oldPassword" placeholder="Old Password" required>
+                                        <input type="password" name="password" placeholder="New Password" required>
+                                        <input type="password" name="cfrmPassword" placeholder="Confirm Password" required>
+                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                        <input type="submit" value="Change Password">
+                                    </form>
+                        </div>
+                    </div>
+
+    </body>
+
+    </html>

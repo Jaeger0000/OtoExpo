@@ -33,11 +33,7 @@ body {
     text-align: center;
   }
   
-  .product img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
-  }
+
   
   .product h3 {
     margin-top: 10px;
@@ -61,4 +57,14 @@ body {
   .product button:hover {
     background-color: #45a049;
   }
+  .addpbike-images{
+      width: 300px; 
+    height: 300px; 
+}
+.addpcar-images{
+  width:300px;
+  height: 300px;
   
+}
+
+
