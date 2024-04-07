@@ -7,21 +7,21 @@
     
     <main>
         <div class="container-addproduct">
-            <h1 class="h1-addproduct">Add Car</h1>
+            <h1 class="h1-addproduct">Add New Car</h1>
            
-            <form class="form-addproduct" action="submit_listing.php" method="POST" enctype="multipart/form-data">
+            <form class="form-addproduct" action="/add-product/car" method="POST">
                 <div class="form-group-addproduct">
                     <label for="name">Title:</label>
                     <input class="inp-addproduct" type="text" id="name" name="name" required>
                 </div>
                 <div class="form-group-addproduct">
                     <label class="label-addproduct" for="make">Make:</label>
-                    <input class="inp-addproduct" type="text" id="make" name="make" required>
+                    <input class="inp-addproduct" type="text" id="make" name="car_marka" required>
                 </div>
                 
                 <div class="form-group-addproduct">
                     <label for="model">Model:</label>
-                    <input class="inp-addproduct" type="text" id="model" name="model" required>
+                    <input class="inp-addproduct" type="text" id="model" name="car_model" required>
                 </div>
                 <div class="form-group-addproduct">
                     <label for="year">Year:</label>
@@ -43,11 +43,13 @@
                     <label for="description">Description:</label><br>
                     <textarea class="inp-addproduct" id="description" name="description" rows="4" cols="50" required></textarea>
                 </div>
-                <div class="form-group-addproduct">
+                <!-- <div class="form-group-addproduct">
                     <label for="image">Upload Image:</label>
                     <input class="inp-file-addproduct" type="file" id="image" name="image" accept="image/*" required>
-                </div>
+                </div> -->
                 <div class="form-group-addproduct">
+                    
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <input class="inp-sub-addproduct" type="submit" value="Submit">
                 </div>
             </form>

@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
+const Car = require('../models/cars');
 exports.getFavorite = (req, res, next) => {
-    console.log('şuan  favoritee egetter');
     var errormsg = req.flash('error');
     if (errormsg.length > 0) {
         errormsg = errormsg[0];
@@ -10,9 +10,6 @@ exports.getFavorite = (req, res, next) => {
     }
     async function init() {
         try {
-            if (!req.session.user) {
-                return res.redirect('/login');
-            }
             const user = await User.findByPk(req.session.user.id);
             const favorite = await user.getFavorite();
             const products = await favorite.getCars(); // üç farklı favorite böl 3 farklı değer yolla
@@ -29,6 +26,52 @@ exports.getFavorite = (req, res, next) => {
     init();
 }
 
+
+exports.postFavorite = async (req, res, next) => {
+    const productId = req.body.productId;
+    try {
+        const user = await User.findByPk(req.session.user.id);
+        const favorite = await user.getFavorite();
+        const cars = await favorite.getCars({ where: { id: productId } });
+
+        if (cars.length > 0) {
+            const car = cars[0];
+            const oldQuantity = car.favoriteItem.quantity;
+            const newQuantity = oldQuantity + 1;
+            await favorite.addCar(car, { through: { quantity: newQuantity } });
+        } else {
+            const car = await Car.findByPk(productId);
+            await favorite.addCar(car, { through: { quantity: 1 } });
+        }
+        res.redirect('/favorite');
+    } catch (error) {
+        console.log(error);
+        // Handle the error appropriately, such as sending an error response
+        // res.status(500).send('Internal Server Error');
+        // or redirecting the user to an error page
+        // res.redirect('/error');
+    }
+};
+
+exports.postDeleteFavorite = async (req, res, next) => {
+    const productId = req.body.productId;
+    try {
+        const user = await User.findByPk(req.session.user.id);
+        const favorite = await user.getFavorite();
+        const cars = await favorite.getCars({ where: { id: productId } });
+        const car = cars[0];
+        await favorite.removeCar(car);
+        res.redirect('/favorite');
+    } catch (error) {
+        console.log(error);
+        // Handle the error appropriately, such as sending an error response
+        // res.status(500).send('Internal Server Error');
+        // or redirecting the user to an error page
+        // res.redirect('/error');
+    }
+
+}
+
 exports.getUser = (req, res, next) => {
    
     async function init() {
@@ -37,10 +80,10 @@ exports.getUser = (req, res, next) => {
             console.log(userId);
             const user = await User.findByPk(userId);
             if(user === null){
-                return res.redirect('/');
+                return res.redirect('/user');
             }
             if (user.id !== req.session.user.id) {
-                return res.redirect('/');
+                return res.redirect('/user');
             }
             var errormsg = req.flash('error');
             if (errormsg.length > 0) {

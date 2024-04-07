@@ -1,8 +1,37 @@
 <%- include('../includes/head');  %>
+<link rel="stylesheet" href="css/product.css">
 
 </head>
 <body>
 <%- include('../includes/nav-bar');  %>
-    <h1>Hello Bro</h1>
+<main>
+    <div class="container">
+        <h2>Products</h2>
+    <% if(products.length > 0){ %>
+    <% for (let product of products) { %>
+        
+        <div class="product-list">
+          <div class="product">
+            <h2><%= product.name %></h2>
+            <img src="product1.jpg" alt="Product 1">
+            <h3><%= product.price %></h3>
+            <p><%= product.announce_details  %></p>
+
+            <p><%= product.kilometer %></p>
+            <form action="/favorite" method="post" >
+                <input type="hidden" name="productId" value="<%= product.id %>">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <button type="submit" >Add to favorite</button>
+            </form>
+          </div>
+          <!-- Add more product items as needed -->
+        
+    <% } %>
+</div>
+        <% } else{ %>
+        <h2>Added no products yet</h2>
+        <% } %>
+        </div>
+</main>
 
 </body>

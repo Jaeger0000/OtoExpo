@@ -15,11 +15,15 @@ User.hasMany(Motorcycle);
 User.hasOne(Favorite);
 Favorite.belongsTo(User);
 
-Cars.belongsToMany(Favorite , {through: FavoriteItem});
-Favorite.hasMany(Cars);
 
-Motorcycle.belongsToMany(Favorite , {through: FavoriteItem});
-Favorite.hasMany(Motorcycle);
+Favorite.belongsToMany(Cars, {through: FavoriteItem});
+Cars.belongsToMany(Favorite, {through: FavoriteItem});
+
+
+
+
+// Motorcycle.belongsToMany(Favorite , {through: FavoriteItem});
+// Favorite.belongsToMany(Motorcycle , {through: FavoriteItem});
 
 
 

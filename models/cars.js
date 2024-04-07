@@ -38,10 +38,10 @@ const Cars = sequelize.define("cars", {
     allowNull: false,
   },
   
-  imageUrl: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
+  // imageUrl: {
+  //   type: Sequelize.STRING,
+  //   allowNull: false,
+  // },
   announce_details: {
     type: Sequelize.TEXT,
     allowNull: false,

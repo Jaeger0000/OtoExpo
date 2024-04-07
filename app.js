@@ -18,10 +18,6 @@ const userRoutes = require('./routes/user-page');
 const addProductRoutes = require('./routes/add-product');
 
 
-
-
-
-
 const app = express();
 const csrfProtection = csrf();
 
@@ -60,9 +56,7 @@ app.use((req, res, next) => {
     res.status(404).render('MainPages/404', { pageTitle: 'Page Not Found',path: '/404' });
 });
 
-
-const dbconnect = databeseConnection;
-dbconnect;
+databeseConnection;
 
 app.listen(3000);
 

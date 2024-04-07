@@ -7,6 +7,9 @@ const FavoriteItem = sequelize.define('favoriteItem',{
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
+    },
+    quantity: {
+        type: Sequelize.INTEGER,
     }
 });
 

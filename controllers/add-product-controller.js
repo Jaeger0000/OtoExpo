@@ -24,12 +24,12 @@ exports.postAddProductCar = (req, res, next) => {
     const name = req.body.name;
     const car_marka = req.body.car_marka;
     const car_model = req.body.car_model;
-    const production_year = req.body.production_year;
+    const year = req.body.year;
     const kilometer = req.body.kilometer;
-    const car_color = req.body.car_color;
+    const color = req.body.color;
     const price = req.body.price;
-    const imageUrl = req.body.imageUrl;
-    const announce_details = req.body.announce_details;
+    //const imageUrl = req.body.imageUrl;
+    const description = req.body.description;
     const userId = req.session.user.id;
     async function init(){
         try {
@@ -38,12 +38,12 @@ exports.postAddProductCar = (req, res, next) => {
                 name: name,
                 car_marka: car_marka,
                 car_model: car_model,
-                production_year: production_year,
+                production_year: year,
                 kilometer: kilometer,
-                car_color: car_color,
+                car_color: color,
                 price: price,
-                imageUrl: imageUrl,
-                announce_details: announce_details
+                // imageUrl: imageUrl,
+                announce_details: description
             });
             res.redirect('/products'); // my products page eklenip oraya yönlendirilicek
         } catch (error) {
