@@ -3,7 +3,9 @@
 .container-addproduct {
     width: 80%;
     margin: 20px auto;
+    margin-left: 300px;
     background-color: #fff;
+    
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -35,7 +37,7 @@
     margin-top: 5px;
 }
 
-.inp-sub-addproduct {
+.inp-sub-addproduct-button {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -45,6 +47,6 @@
     color: #fff;
     cursor: pointer;
 }
-.inp-sub-addproduct:hover {
+.inp-sub-addproduct-button:hover {
     background-color: #0056b3;
 }

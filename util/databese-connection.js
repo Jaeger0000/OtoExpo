@@ -1,23 +1,20 @@
 const User = require('../models/user');
 const Favorite = require('../models/favorite');
 const FavoriteItem = require('../models/favorite-item');
-const Cars = require('../models/cars');
-const Motorcycle = require('../models/motorcycle');
+const Products = require('../models/products');
 
 const sequelize = require('../util/database');
 
-Cars.belongsTo(User, {constraints: true, onDelete: 'CASCADE'});
-Motorcycle.belongsTo(User, {constraints: true, onDelete: 'CASCADE'});
+Products.belongsTo(User, {constraints: true, onDelete: 'CASCADE'});
 
-User.hasMany(Cars);
-User.hasMany(Motorcycle);
+User.hasMany(Products);
 
 User.hasOne(Favorite);
 Favorite.belongsTo(User);
 
 
-Favorite.belongsToMany(Cars, {through: FavoriteItem});
-Cars.belongsToMany(Favorite, {through: FavoriteItem});
+Favorite.belongsToMany(Products, {through: FavoriteItem});
+Products.belongsToMany(Favorite, {through: FavoriteItem});
 
 
 

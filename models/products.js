@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 
 const sequelize = require("../util/database");
 
-const Cars = sequelize.define("cars", {
+const Products = sequelize.define("products", {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -13,11 +13,11 @@ const Cars = sequelize.define("cars", {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  car_marka: {
+  marka: {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  car_model: {
+  model: {
     type: Sequelize.STRING,
     allowNull: false,
   },
@@ -29,12 +29,16 @@ const Cars = sequelize.define("cars", {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
-  car_color: {
+  color: {
     type: Sequelize.STRING,
     allowNull: false,
   },
   price: {
     type: Sequelize.DOUBLE,
+    allowNull: false,
+  },
+  type: {
+    type: Sequelize.STRING,
     allowNull: false,
   },
   
@@ -48,4 +52,4 @@ const Cars = sequelize.define("cars", {
   },
 });
 
-module.exports = Cars;
+module.exports = Products;

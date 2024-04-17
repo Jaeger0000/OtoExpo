@@ -1,5 +1,5 @@
-const User = require('../models/user');
-const Car = require('../models/cars');
+
+const Products = require('../models/products');
 
 exports.getIndex = (req, res, next) => {
     var errormsg = req.flash('error');
@@ -19,7 +19,7 @@ exports.getProducts = (req, res, next) => {
     }
     async function init(){
         try {
-            const products = await Car.findAll();
+            const products = await Products.findAll();
             res.render('MainPages/products',{path:'/products',error: errormsg,products: products});
         } catch (error) {
             console.log(error);

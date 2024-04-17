@@ -6,7 +6,9 @@
 <body>
 <%- include('../includes/nav-bar');  %>
 <main>
-  
+  <% if(error){ %>
+    <h4 class="error-message"><%= error %></h4>
+<%  } %>
     <% if(favorites.length > 0){ %>
     <% for (let favorite of favorites) { %>
         <div class="container">
@@ -14,8 +16,9 @@
         <div class="product-list">
           <div class="product">
             <img src="product1.jpg" alt="Product 1">
-            <h3><%= favorite.favoriteItem.quantity %></h3>
-            <p>$19.99</p>
+            <h3><%= favorite.model %></h3>
+            <h3><%= favorite.color %></h3>
+            <p><%= favorite.price %></p>
             <form action="/delete-favorite" method="post">
               <input type="hidden" name="productId" value="<%= favorite.id %>">
               <input type="hidden" name="_csrf" value="<%= csrfToken %>">

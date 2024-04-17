@@ -1,0 +1,10 @@
+<div class="container-left-navbar">
+    <nav class="navbar-left">
+        <ul>
+            <li><a class="navbar-left-a <%= path==='user/account' ? 'active': '' %>"
+                    href="/user/<%= user.id %>/account">Account</a></li>
+            <li><a class="navbar-left-a" href="/user/<%= user.id %>/my-cars">My Cars</a></li>
+            <li><a class="navbar-left-a" href="/user/<%= user.id %>/my-motorcycles">My Motorcycles</a></li>
+            <li><a class="navbar-left-a" href="/user/<%= user.id %>/help">Help</a></li>
+        </ul>
+    </nav>

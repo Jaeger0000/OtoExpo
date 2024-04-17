@@ -3,10 +3,6 @@
     height: 120vh;
     
 }
-* {
-    margin: 0;
-}
-
 
 .navbar-left {
     background-color: black;
@@ -55,4 +51,18 @@
 .content-left {
     flex-grow: 1;
     padding: 20px;
+}
+.edit-button {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .edit-button:hover {
+    background-color: #45a049;
 }

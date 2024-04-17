@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
-const Car = require('../models/cars');
+const Products = require('../models/products');
+const { where } = require('sequelize');
 exports.getFavorite = (req, res, next) => {
     var errormsg = req.flash('error');
     if (errormsg.length > 0) {
@@ -12,7 +13,7 @@ exports.getFavorite = (req, res, next) => {
         try {
             const user = await User.findByPk(req.session.user.id);
             const favorite = await user.getFavorite();
-            const products = await favorite.getCars(); // üç farklı favorite böl 3 farklı değer yolla
+            const products = await favorite.getProducts(); // üç farklı favorite böl 3 farklı değer yolla
             res.render('UserPages/favorite', {
                 path: '/favorite',
                 error: errormsg,
@@ -32,16 +33,16 @@ exports.postFavorite = async (req, res, next) => {
     try {
         const user = await User.findByPk(req.session.user.id);
         const favorite = await user.getFavorite();
-        const cars = await favorite.getCars({ where: { id: productId } });
 
-        if (cars.length > 0) {
-            const car = cars[0];
-            const oldQuantity = car.favoriteItem.quantity;
-            const newQuantity = oldQuantity + 1;
-            await favorite.addCar(car, { through: { quantity: newQuantity } });
+        const products = await favorite.getProducts({ where: { id: productId } });
+
+        if (products.length > 0) {
+            await req.flash('error', 'Product already exists in the favorite list');
+            return res.redirect('/favorite');
+
         } else {
-            const car = await Car.findByPk(productId);
-            await favorite.addCar(car, { through: { quantity: 1 } });
+            const product = await Products.findByPk(productId);
+            await favorite.addProducts(product, { through: { quantity: 1 } });
         }
         res.redirect('/favorite');
     } catch (error) {
@@ -58,9 +59,9 @@ exports.postDeleteFavorite = async (req, res, next) => {
     try {
         const user = await User.findByPk(req.session.user.id);
         const favorite = await user.getFavorite();
-        const cars = await favorite.getCars({ where: { id: productId } });
-        const car = cars[0];
-        await favorite.removeCar(car);
+        const products = await favorite.getProducts({ where: { id: productId } });
+        const product = products[0];
+        await favorite.removeProduct(product);
         res.redirect('/favorite');
     } catch (error) {
         console.log(error);
@@ -91,7 +92,7 @@ exports.getUser = (req, res, next) => {
             } else {
                 errormsg = null;
             }
-            res.render('UserPages/user', { path: 'user/account', error: errormsg , user: user});
+            res.render('UserPages/user-navbar-pages/user', { path: 'user/account', error: errormsg , user: user});
         } catch (error) {
             console.log(error);
         }
@@ -195,3 +196,102 @@ exports.postPasswordUpdate = (req, res, next) => {
     userUpdate();
 }
 
+
+exports.getMyCars = async (req,res,next) => {
+    try {
+        const user = await User.findByPk(req.session.user.id);
+        const products =await user.getProducts({where: {type: 'car'}});
+        res.render('UserPages/user-navbar-pages/my-cars',{ path: '/my-cars', products: products, name: 'cars'});
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.getMyMotorcycles = async (req,res,next) => {
+    try {
+        const user = await User.findByPk(req.session.user.id);
+        const products =await user.getProducts({where: {type: 'motorcycle'}});
+        res.render('UserPages/user-navbar-pages/my-motorcycles',{ path: '/my-motorcycles', products: products, name: 'motorcycles'});
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+exports.getEditMyProduct = async (req,res,next) => {
+    var errormsg = req.flash('error');
+    if (errormsg.length > 0) {
+        errormsg = errormsg[0];
+    } else {
+        errormsg = null;
+    }
+
+
+    const productId = req.params.productId;
+    try {
+        const user = await User.findByPk(req.session.user.id);
+        const cars = await user.getProducts({ where: { id: productId } });
+        const car = cars[0];
+        console.log(car);
+        res.render('UserPages/user-navbar-pages/edit-my-product',{ path: '/my-cars', product: car, name:'editt', error: errormsg});
+    } catch (error) {
+        console.log(error);
+    }
+
+
+}
+
+exports.postEditMyProduct = async (req,res,next) => {
+    const productId = req.body.productId;
+    const name = req.body.name;
+    const price = req.body.price;
+    const description = req.body.description;
+    const imageUrl = req.body.imageUrl;
+    try {
+        const user = await User.findByPk(req.session.user.id);
+        const cars = await user.getProducts({ where: { id: productId } });
+        const car = cars[0];
+        car.name = name;
+        car.price = price;
+        car.description = description;
+        car.imageUrl = imageUrl;
+        await car.save();
+        res.redirect('/user/'+req.session.user.id+'/my-cars');
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
+exports.postDeleteMyProduct = async (req,res,next) => {
+
+
+}
+
+
+
+exports.postEditMyCar = async (req,res,next) => {
+
+    const productId = req.body.productId;
+    const name = req.body.name;
+    const car_marka = req.body.car_marka;
+    const car_model = req.body.car_model;
+    const year = req.body.year;
+    const price = req.body.price;
+    const description = req.body.description;
+    // const imageUrl = req.body.imageUrl;
+    try {
+        const user = await User.findByPk(req.session.user.id);
+        const cars = await user.getProducts({ where: { id: productId } });
+        const car = cars[0];
+        car.name = name;
+        car.price = price;
+        car.description = description;
+        car.car_marka = car_marka;
+        car.car_model = car_model;
+        car.year = year;
+        // car.imageUrl = imageUrl;
+        await car.save();
+        res.redirect('/user/'+req.session.user.id+'/my-cars');
+    } catch (error) {
+        console.log(error);
+    }
+}

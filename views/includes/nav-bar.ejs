@@ -24,7 +24,7 @@
       <input type="hidden" name="_csrf" value="<%= csrfToken %>">
       <input type="submit" value="Log Out"></form></li>
     <li style="float:right">
-      <a class="" href="/user/<%= user.id %>/account"><%= user.name %></a>
+      <a href="/user/<%= user.id %>/account" class="<%= path==='user/account' ? 'active': '' %>"><%= user.name %></a>
     </li>
     
     <% } else { %>

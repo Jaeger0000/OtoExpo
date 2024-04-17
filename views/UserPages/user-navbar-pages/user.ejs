@@ -1,4 +1,4 @@
-<%- include('../includes/head'); %>
+<%- include('../../includes/head'); %>
     <link rel="stylesheet" href="/css/navBarCss.css">
     <link rel="stylesheet" href="/css/signup.css">
     <link rel="stylesheet" href="/css/userSetting.css">
@@ -6,17 +6,9 @@
     </head>
 
     <body>
-        <%- include('../includes/nav-bar'); %>
+        <%- include('../../includes/nav-bar'); %>
             <main>
-                <div class="container-left-navbar">
-                    <nav class="navbar-left">
-                        <ul>
-                            <li><a class="navbar-left-a <%= path==='user/account' ? 'active': '' %>"
-                                    href="/user/<%= user.id %>/account">Account</a></li>
-                            <li><a class="navbar-left-a" href="/user/<%= user.id %>/products">My Products</a></li>
-                            <li><a class="navbar-left-a" href="/user/<%= user.id %>/help">Help</a></li>
-                        </ul>
-                    </nav>
+                <%- include('./includes/user-navbar'); %>
                     <div class="content-left">
                         <!-- Sayfa içeriği buraya gelecek -->
                         <div class="container">

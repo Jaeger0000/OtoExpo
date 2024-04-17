@@ -62,8 +62,6 @@ app.listen(3000);
 
 
 
-// Sadece add product page ekledim , direkt add product gitmesini engelleyen middleware eklenecek 
-// error page eklenec olmayan bir uzantıya gitmeye çalışınca
 //     Products table güncellenecek ve 1 ana table altında 3(duruma göre artabilir) farklı table çevrilicek,
 // add product post methodu controller ve routes eklenecek,
 // categories çekerken filtreleme ile çekme eklenecek,
