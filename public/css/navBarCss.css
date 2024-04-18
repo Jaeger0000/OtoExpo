@@ -1,8 +1,15 @@
-body, ul {
+ul, body {
   font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
   }
+
+.add_product_style {
+  font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
 
   /* Navigation bar styles */
   .navbar {
@@ -108,6 +115,7 @@ body, ul {
     z-index: 1;
   }
 
+<<<<<<< Updated upstream
   .dropdown-content-user a {
     color: white;
     padding: 12px 16px 20px;
@@ -121,3 +129,21 @@ body, ul {
     display: block;
   }
   
+=======
+  .logo {
+
+    width: 120px; /* Logo genişliği */
+    height: 60px; /* Logo yüksekliği */
+    background-image: url('../images/logo.jpg'); /* Logo resmi */
+    background-size: contain; /* Resmi div boyutuna uygun şekilde boyutlandır */
+    background-repeat: no-repeat; /* Resmi tekrar etme */
+}
+
+.user-name-size{
+  font-size: 20px;
+  color: white;
+  padding: 14px 16px;
+  text-align: center;
+  text-decoration: none;
+}
+>>>>>>> Stashed changes

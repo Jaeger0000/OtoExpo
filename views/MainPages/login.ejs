@@ -1,19 +1,27 @@
 <%- include('../includes/head');  %>
 <link rel="stylesheet" href="/css/login.css">
 
+
 </head>
-<body>
+<body class= "login_body">
 <%- include('../includes/nav-bar');  %>
 <main>
 <div class="container">
     <% if(error){ %>
         <h4 class="error-message"><%= error %></h4>
     <%  } %>
-  <h2>Login</h2>
+  <h2 class = "login_header">Login</h2>
   <form action="/login" method="post">
+<<<<<<< Updated upstream:views/MainPages/login.ejs
     <input type="email" name="email" placeholder="Email" required>
     <input type="password" name="password" placeholder="Password" required>
     <input type="submit" value="Login">
+=======
+    <input class = "login_input_style" type="email" name="email" placeholder="Email" required>
+    <input class = "login_input_style" type="password" name="password" placeholder="Password" required>
+    <input class = "login_submit_style" type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <input class = "login_submit_button" type="submit" value="Login">
+>>>>>>> Stashed changes:views/AuthPages/login.ejs
   </form>
   <div class="text-center">
     <a href="#">Forgot password?</a>

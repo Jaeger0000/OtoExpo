@@ -10,14 +10,24 @@
     <% if(error){ %>
     <h4 class="error-message"><%= error %></h4>
     <%  } %>
-  <h2 class="signupH2">Signup</h2>
+  <h2 class="signup_header">Signup</h2>
   <form action="/signup" method="post">
+<<<<<<< Updated upstream:views/MainPages/signup.ejs
     <input type="text" name="name" placeholder="Name" required>
     <input type="text" name="surName" placeholder="Surname" required>
     <input type="email" name="email" placeholder="Email" required>
     <input type="password" name="password" placeholder="Password" required>
     <input type="password" name="cfrmPassword" placeholder="Confirm Password" required>
     <input type="submit" value="Signup">
+=======
+    <input class = "signup_input" type="text" name="name" placeholder="Name" required>
+    <input class = "signup_input" type="text" name="surName" placeholder="Surname" required>
+    <input class = "signup_input" type="email" name="email" placeholder="Email" required>
+    <input class = "signup_input" type="password" name="password" placeholder="Password" required>
+    <input class = "signup_input" type="password" name="cfrmPassword" placeholder="Confirm Password" required>
+    <input class = "signup_submit_style" type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <input class = "signup_submit_button" type="submit" value="Signup">
+>>>>>>> Stashed changes:views/AuthPages/signup.ejs
   </form>
   <div class="text-center text-small">
     Already have an account? <a href="/login">Login</a>
