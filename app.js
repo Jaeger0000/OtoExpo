@@ -20,7 +20,7 @@ const app = express();
 const store = new MySqlStore({
     host: 'localhost',
     user: 'root',
-    password: 'Oguzhan6886',
+    password: '123456528',
     database: 'otoexpo-databese'
 });
 
