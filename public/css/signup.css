@@ -1,56 +1,83 @@
+body {
+  background-image: url('https://img-s1.onedio.com/id-5406e18bc62a80e52af57780/rev-0/raw/s-2075e5a29881f19f4183ac2ecf70e5d5ccba7b14.jpg');
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  z-index: 1; 
+  animation: fadeIn 0.5s ease-in-out; 
+}
 
 
-  .container {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+.container {
+  max-width: 400px;
+  margin: 50px auto;
+  margin-left: 50px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  animation: slideInFromRight 1s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0; 
   }
-
-  h2.signupH2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: black;
+  to {
+    opacity: 1;
   }
-
-  input[type="text"],
-  input[type="email"],
-  input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
+}
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
   }
-
-  input[type="submit"] {
-    width: 100%;
-    background-color: black;
-    color: #fff;
-    padding: 15px;
-    border: none;
-    font-size: 120%;
-    border-radius: 5px;
-    cursor: pointer;
+  100% {
+    transform: translateX(0);
+    opacity: 1;
   }
+}
 
-  input[type="submit"]:hover {
-    background-color: #333;
-    padding: 15px;
-  }
+h2.signupH2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: black;
+}
 
-  .text-center {
-    padding-top: 20px;
-    text-align: center;
-    font-size: 110%;
-  }
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
 
-  .text-center a {
-    color: black;
-    
-    
+input[type="submit"] {
+  width: 100%;
+  background-color: black;
+  color: #fff;
+  padding: 15px;
+  border: none;
+  font-size: 120%;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-  }
+input[type="submit"]:hover {
+  background-color: #333;
+  padding: 15px;
+}
+
+.text-center {
+  padding-top: 20px;
+  text-align: center;
+  font-size: 110%;
+}
+
+.text-center a {
+  color: black;
+}

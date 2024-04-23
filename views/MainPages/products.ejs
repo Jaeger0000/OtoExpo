@@ -13,7 +13,8 @@
         <div class="product-list">
           <div class="product">
             <h2><%= product.name %></h2>
-            <img src="product1.jpg" alt="Product 1">
+            <img src="<%= product.imageUrl %>" alt="<%= product.id %>" class="products-img">
+            
             <h3><%= product.price %></h3>
             <p><%= product.announce_details  %></p>
 

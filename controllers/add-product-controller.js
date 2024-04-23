@@ -33,6 +33,12 @@ exports.postAddProductCar = (req, res, next) => {
     //const imageUrl = req.body.imageUrl;
     const description = req.body.description;
     const userId = req.session.user.id;
+    const image = req.file;
+    var imageUrl;
+    if(image){
+        const bfimageUrl = image.path;
+        imageUrl = bfimageUrl.replace('public', '');
+    }
     async function init() {
         try {
             const user = await User.findByPk(userId);
@@ -45,7 +51,7 @@ exports.postAddProductCar = (req, res, next) => {
                 color: color,
                 price: price,
                 type: type,
-                // imageUrl: imageUrl,
+                imageUrl: imageUrl,
                 announce_details: description
             });
             res.redirect('/products'); // my products page eklenip oraya yönlendirilicek
@@ -80,6 +86,12 @@ exports.postAddProductMotorcycle = (req, res, next) => {
     const description = req.body.description;
     const userId = req.session.user.id;
     const type = req.body.type;
+    const image = req.file;
+    var imageUrl;
+    if(image){
+        const bfimageUrl = image.path;
+        imageUrl = bfimageUrl.replace('public', '');
+    }
     async function init() {
         try {
             const user = await User.findByPk(userId);
@@ -92,7 +104,7 @@ exports.postAddProductMotorcycle = (req, res, next) => {
                 color: color,
                 price: price,
                 type: type,
-                // imageUrl: imageUrl,
+                imageUrl: imageUrl,
                 announce_details: description
             });
             res.redirect('/products'); // my products page eklenip oraya yönlendirilicek

@@ -74,13 +74,12 @@ exports.postDeleteFavorite = async (req, res, next) => {
 }
 
 exports.getUser = (req, res, next) => {
-   
+
     async function init() {
         try {
             const userId = req.params.UserId;
-            console.log(userId);
             const user = await User.findByPk(userId);
-            if(user === null){
+            if (user === null) {
                 return res.redirect('/user');
             }
             if (user.id !== req.session.user.id) {
@@ -92,7 +91,7 @@ exports.getUser = (req, res, next) => {
             } else {
                 errormsg = null;
             }
-            res.render('UserPages/user-navbar-pages/user', { path: 'user/account', error: errormsg , user: user});
+            res.render('UserPages/user-navbar-pages/user', { path: 'user/account', error: errormsg, user: user });
         } catch (error) {
             console.log(error);
         }
@@ -104,7 +103,7 @@ exports.getUser = (req, res, next) => {
 }
 
 exports.getUserPage = (req, res, next) => {
-    const id = req.session.user.id ;
+    const id = req.session.user.id;
     res.redirect('/user/' + id + '/account');
 }
 
@@ -132,7 +131,7 @@ exports.postSurnameUpdate = (req, res, next) => {
             await user.save();
             res.redirect('/user');
         }
-        catch(error){
+        catch (error) {
             console.log(error);
         }
     }
@@ -144,7 +143,7 @@ exports.postEmailUpdate = (req, res, next) => {
         const existsUser = await User.findOne({ where: { email: email } });
         if (existsUser) {
             req.flash('error',
-            'Email already exists. Please enter a different email address');
+                'Email already exists. Please enter a different email address');
             return res.redirect('/user');
         }
     }
@@ -156,7 +155,7 @@ exports.postEmailUpdate = (req, res, next) => {
             await user.save();
             res.redirect('/user');
         }
-        catch(error){
+        catch (error) {
             console.log(error);
         }
     }
@@ -167,16 +166,16 @@ exports.postPasswordUpdate = (req, res, next) => {
     const oldpassword = req.body.oldPassword;
     const password = req.body.password;
     const cfrmPassword = req.body.cfrmPassword;
-    console.log('old password:  '+oldpassword);
+    console.log('old password:  ' + oldpassword);
     console.log('old password:  ' + req.session.user.password);
-    if(bcrypt.compareSync(oldpassword, req.session.user.password) === false){
-        req.flash('error', 
-        'The entered password is incorrect');
+    if (bcrypt.compareSync(oldpassword, req.session.user.password) === false) {
+        req.flash('error',
+            'The entered password is incorrect');
         return res.redirect('/user');
     }
     if (password !== cfrmPassword) {
-        req.flash('error', 
-        'Passwords do not match');
+        req.flash('error',
+            'Passwords do not match');
         return res.redirect('/user');
     }
     async function userUpdate() {
@@ -189,7 +188,7 @@ exports.postPasswordUpdate = (req, res, next) => {
             req.session.user = user;
             res.redirect('/user');
         }
-        catch(error){
+        catch (error) {
             console.log(error);
         }
     }
@@ -197,26 +196,43 @@ exports.postPasswordUpdate = (req, res, next) => {
 }
 
 
-exports.getMyCars = async (req,res,next) => {
+exports.getMyCars = async (req, res, next) => {
     try {
-        const user = await User.findByPk(req.session.user.id);
-        const products =await user.getProducts({where: {type: 'car'}});
-        res.render('UserPages/user-navbar-pages/my-cars',{ path: '/my-cars', products: products, name: 'cars'});
+        const userId = req.params.UserId;
+        const userSId = req.session.user.id;
+        const user = await User.findByPk(userId);
+        if (user === null) {
+            return res.redirect('/user/'+ userSId + '/my-cars');
+        }
+        if (user.id !== req.session.user.id) {
+            return res.redirect('/user/'+ userSId + '/my-cars');
+        }
+
+        const products = await user.getProducts({ where: { type: 'car' } });
+        res.render('UserPages/user-navbar-pages/my-cars', { path: '/my-cars', products: products, name: 'cars' });
     } catch (error) {
         console.log(error);
     }
 }
-exports.getMyMotorcycles = async (req,res,next) => {
+exports.getMyMotorcycles = async (req, res, next) => {
     try {
-        const user = await User.findByPk(req.session.user.id);
-        const products =await user.getProducts({where: {type: 'motorcycle'}});
-        res.render('UserPages/user-navbar-pages/my-motorcycles',{ path: '/my-motorcycles', products: products, name: 'motorcycles'});
+        const userId = req.params.UserId;
+        const userSId = req.session.user.id;
+        const user = await User.findByPk(userId);
+        if (user === null) {
+            return res.redirect('/user/'+ userSId + '/my-motorcycles');
+        }
+        if (user.id !== req.session.user.id) {
+            return res.redirect('/user/'+ userSId + '/my-motorcycles');
+        }
+        const products = await user.getProducts({ where: { type: 'motorcycle' } });
+        res.render('UserPages/user-navbar-pages/my-motorcycles', { path: '/my-motorcycles', products: products, name: 'motorcycles' });
     } catch (error) {
         console.log(error);
     }
 }
 
-exports.getEditMyProduct = async (req,res,next) => {
+exports.getEditMyProduct = async (req, res, next) => {
     var errormsg = req.flash('error');
     if (errormsg.length > 0) {
         errormsg = errormsg[0];
@@ -231,7 +247,7 @@ exports.getEditMyProduct = async (req,res,next) => {
         const cars = await user.getProducts({ where: { id: productId } });
         const car = cars[0];
         console.log(car);
-        res.render('UserPages/user-navbar-pages/edit-my-product',{ path: '/my-cars', product: car, name:'editt', error: errormsg});
+        res.render('UserPages/user-navbar-pages/edit-my-product', { path: '/my-cars', product: car, name: 'editt', error: errormsg });
     } catch (error) {
         console.log(error);
     }
@@ -239,7 +255,7 @@ exports.getEditMyProduct = async (req,res,next) => {
 
 }
 
-exports.postEditMyProduct = async (req,res,next) => {
+exports.postEditMyProduct = async (req, res, next) => {
     const productId = req.body.productId;
     const name = req.body.name;
     const price = req.body.price;
@@ -254,21 +270,31 @@ exports.postEditMyProduct = async (req,res,next) => {
         car.description = description;
         car.imageUrl = imageUrl;
         await car.save();
-        res.redirect('/user/'+req.session.user.id+'/my-cars');
+        res.redirect('/user/' + req.session.user.id + '/my-cars');
     } catch (error) {
         console.log(error);
     }
 
 }
 
-exports.postDeleteMyProduct = async (req,res,next) => {
-
+exports.postDeleteMyProduct = async (req, res, next) => {
+    const productId = req.body.productId;
+    try {
+        const user = await User.findByPk(req.session.user.id);
+        const products = await user.getProducts({ where: { id: productId } });
+        const product = products[0];
+        await product.destroy();
+        await product.save();
+        res.redirect('/user/' + req.session.user.id + '/my-cars');
+    } catch (error) {
+        console.log(error);
+    }
 
 }
 
 
 
-exports.postEditMyCar = async (req,res,next) => {
+exports.postEditMyCar = async (req, res, next) => {
 
     const productId = req.body.productId;
     const name = req.body.name;
@@ -290,7 +316,7 @@ exports.postEditMyCar = async (req,res,next) => {
         car.year = year;
         // car.imageUrl = imageUrl;
         await car.save();
-        res.redirect('/user/'+req.session.user.id+'/my-cars');
+        res.redirect('/user/' + req.session.user.id + '/my-cars');
     } catch (error) {
         console.log(error);
     }

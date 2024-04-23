@@ -1,16 +1,19 @@
 const express = require('express');
 
-const store = require('./util/session-store');
+const store = require('./util/database/session-store');
 
 const path = require('path');
 
 const session = require('express-session');
 const flash = require('connect-flash');
 const csrf  = require('csurf');
+const multer = require('multer');
 
 const User = require('./models/user');
 
-const databeseConnection = require('./util/databese-connection');
+const databeseConnection = require('./util/database/databese-connection');
+
+const multValues = require("./util/multer/multer-values");
 
 const mainPageRoutes = require('./routes/main-page');
 const authRoutes = require('./routes/auth-page');
@@ -20,11 +23,11 @@ const addProductRoutes = require('./routes/add-product');
 
 const app = express();
 const csrfProtection = csrf();
-
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 app.use(express.urlencoded({ extended: false }));
+app.use(multer({ storage: multValues.fileStorage, fileFilter: multValues.fileFilter}).single('image'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret: 'oto-expo-databese', resave: false, saveUninitialized: false, store: store}));
 app.use(csrfProtection);
