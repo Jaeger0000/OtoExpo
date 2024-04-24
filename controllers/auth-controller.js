@@ -1,6 +1,8 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 
+const gmailPassword = "ylclymaqntfimrce";
+
 exports.getSignup = (req, res, next) => {
     var errormsg = req.flash('error');
     if (errormsg.length > 0) {
