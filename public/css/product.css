@@ -45,7 +45,7 @@ body {
   }
   
   .product button {
-    background-color: #4caf50;
+    background-color: #1c201c;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -53,6 +53,7 @@ body {
     cursor: pointer;
     transition: background-color 0.3s;
   }
+  
   
   .product button:hover {
     background-color: #45a049;
@@ -67,8 +68,8 @@ body {
   
 }
 .products-img{
-  width: 300px;
-  height: 300px;
+  width: 360px;
+  height: 330px;
 }
 
 
