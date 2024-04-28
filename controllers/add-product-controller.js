@@ -30,7 +30,6 @@ exports.postAddProductCar = (req, res, next) => {
     const color = req.body.color;
     const price = req.body.price;
     const type = req.body.type;
-    //const imageUrl = req.body.imageUrl;
     const description = req.body.description;
     const userId = req.session.user.id;
     const image = req.file;
@@ -82,7 +81,6 @@ exports.postAddProductMotorcycle = (req, res, next) => {
     const kilometer = req.body.kilometer;
     const color = req.body.color;
     const price = req.body.price;
-    //const imageUrl = req.body.imageUrl;
     const description = req.body.description;
     const userId = req.session.user.id;
     const type = req.body.type;

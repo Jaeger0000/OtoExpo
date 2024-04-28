@@ -6,7 +6,7 @@
 <%- include('../includes/nav-bar');  %>
 <main>
     <div class="container">
-        <h2>PRODUCTS</h2>
+        
     <% if(products.length > 0){ %>
     <% for (let product of products) { %>
         
@@ -24,6 +24,8 @@
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <button type="submit" >Add to favorite</button>
             </form>
+            <br>
+            <a href="/product/<%= product.id %>" class="button">Product Details</a>
           </div>
           <!-- Add more product items as needed -->
         

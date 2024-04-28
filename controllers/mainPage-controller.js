@@ -1,5 +1,7 @@
 
 const Products = require('../models/products');
+const Comment = require('../models/comment');
+const FavoriteItem = require('../models/favorite-item');
 
 exports.getIndex = (req, res, next) => {
     var errormsg = req.flash('error');
@@ -42,3 +44,27 @@ exports.getCategories = (req, res, next) => {
     });
 }
 
+exports.getProduct =async (req, res, next) => {
+    var errormsg = req.flash('error');
+    if (errormsg.length > 0) {
+        errormsg = errormsg[0];
+    } else {
+        errormsg = null;
+    }
+        try {
+            const product = await Products.findByPk(req.params.productId);
+            if(!product){
+                req.flash('error', 'Product not found');
+                return res.redirect('/products');
+            }
+            const comments = await Comment.findAll({where: {replyTo: req.params.productId}});
+            const favorite = await FavoriteItem.findAll({where: {productId: req.params.productId}});
+            var userId = "";
+            if(req.session.user){
+                userId = req.session.user.id;
+            }
+            res.render('MainPages/product',{path:'/product',error: errormsg,product: product, comments: comments, favoriteNumber: favorite.length, userId: userId});
+        } catch (error) {
+            console.log(error);
+        }
+}

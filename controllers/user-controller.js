@@ -47,10 +47,6 @@ exports.postFavorite = async (req, res, next) => {
         res.redirect('/favorite');
     } catch (error) {
         console.log(error);
-        // Handle the error appropriately, such as sending an error response
-        // res.status(500).send('Internal Server Error');
-        // or redirecting the user to an error page
-        // res.redirect('/error');
     }
 };
 
@@ -65,10 +61,6 @@ exports.postDeleteFavorite = async (req, res, next) => {
         res.redirect('/favorite');
     } catch (error) {
         console.log(error);
-        // Handle the error appropriately, such as sending an error response
-        // res.status(500).send('Internal Server Error');
-        // or redirecting the user to an error page
-        // res.redirect('/error');
     }
 
 }
@@ -195,7 +187,6 @@ exports.postPasswordUpdate = (req, res, next) => {
     userUpdate();
 }
 
-
 exports.getMyCars = async (req, res, next) => {
     try {
         const userId = req.params.UserId;
@@ -317,6 +308,34 @@ exports.postEditMyCar = async (req, res, next) => {
         // car.imageUrl = imageUrl;
         await car.save();
         res.redirect('/user/' + req.session.user.id + '/my-cars');
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+exports.postComment = async (req, res, next) => {
+    const comment = req.body.comment;
+    const productId = req.body.productId;
+    try {
+        const user = await User.findByPk(req.session.user.id);
+        await user.createComment({ comment: comment, replyTo: productId, userFullName: user.name + ' ' + user.surName});
+        res.redirect('/product/' + productId);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+exports.postDeleteComment = async (req, res, next) => {
+    const commentId = req.body.commentId;
+    const productId = req.body.productId;
+    try {
+        const user = await User.findByPk(req.session.user.id);
+        const comments = await user.getComments({ where: { id: commentId } });
+        const comment = comments[0];
+        await comment.destroy();
+        await comment.save();
+        res.redirect('/product/' + productId);
     } catch (error) {
         console.log(error);
     }

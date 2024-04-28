@@ -26,6 +26,9 @@ router.post('/password-update',isLogin,userController.postPasswordUpdate);
 
 router.get('/user',isLogin,userController.getUserPage);
 
+router.post("/add-to-comment",isLogin, userController.postComment);
+router.post("/delete-comment",isLogin, userController.postDeleteComment);
+
 
 
 module.exports = router;

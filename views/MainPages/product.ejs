@@ -1,0 +1,86 @@
+<%- include('../includes/head'); %>
+  <link rel="stylesheet" href="/css/navBarCss.css">
+  <link rel="stylesheet" href="/css/one-product.css">
+  <style>
+    .center {
+      text-align: center;
+      margin-top: 100px;
+    }
+  </style>
+
+  </head>
+
+  <body>
+    <%- include('../includes/nav-bar'); %>
+      <main>
+        <div class="product-detail">
+          <img src="<%= product.imageUrl %>" alt="Car Image">
+          <div class="product-info">
+            <h2>
+              <%= product.name%>
+            </h2>
+            <p><strong>Price:</strong> $ <%= product.price %>
+            </p>
+            <p><strong>Color:</strong>
+              <%= product.color %>
+            </p>
+            <p><strong>Mileage:</strong>
+              <%= product.kilometer %> kilometer
+            </p>
+            <p><strong>Location:</strong> Los Angeles, CA</p>
+            <p><strong>Description:</strong>
+              <%= product.announce_details %>
+            </p>
+            <p><strong>Favori Number:</strong>
+              <%= favoriteNumber %>
+            </p>
+
+            <form action="/favorite" method="post">
+              <input type="hidden" name="productId" value="<%= product.id %>">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <button type="submit">Add to favorite</button>
+            </form>
+            <div class="container">
+
+              <% if(comments.length> 0){ %>
+                <% for (let comment of comments) { %>
+
+                  <div>
+                    <div>
+
+                      <p>
+                        <%= comment.userFullName %> : <%= comment.comment %>
+                      </p>
+                      <% if(comment.userId===userId) {%>
+                        <form action="/delete-comment" method="post">
+                          <input type="hidden" name="commentId" value="<%= comment.id %>">
+                          <input type="hidden" name="productId" value="<%= product.id %>">
+                          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                          <button type="submit">Delete</button>
+                          </form>
+                          <% } %>
+
+                            <% } %>
+                    </div>
+                    <% } else{ %>
+                      <h2>Added no comments yet</h2>
+                      <% } %>
+                  </div>
+      </main>
+      <form action="/add-to-comment" method="post">
+        <textarea type="text" name="comment" class="comment-textarea" rows="5" cols="50"> </textarea>
+        <input type="hidden" name="productId" value="<%= product.id %>">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button type="submit">Add to comment</button>
+      </form>
+      </div>
+      </div>
+      </main>
+
+      <footer>
+        <p>&copy; 2024 Car Sales</p>
+      </footer>
+
+  </body>
+
+  </html>
