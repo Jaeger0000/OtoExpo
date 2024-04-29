@@ -1,38 +1,32 @@
-<main>
-    <div class="container">
-        <h2>My <%= name%></h2>
-        <% if(products.length> 0){ %>
+<!-- Inside your main tag -->
+<div class="container">
+    <h2>My <%= name %></h2>
+    <% if(products.length > 0){ %>
+        <div class="product-list">
             <% for (let product of products) { %>
-
-                <div class="product-list">
-                    <div class="product">
-                        <h2>
-                            <%= product.name %>
-                        </h2>
-                        <img src="<%= product.imageUrl %>" alt="<%= product.id %>" class="products-img">
-                        <h3>
-                            <%= product.price %>
-                        </h3>
-                        <p>
-                            <%= product.announce_details %>
-                        </p>
-
-                        <p>
-                            <%= product.kilometer %>
-                        </p>
-                        <a class="edit-button" href="/admin/<%= user.id %>/product-edit/<%= product.id %>">Edit</a>
-                        <form action="/product-delete" method="post" class="deleteForm">
-                            <input type="hidden" name="productId" value="<%= product.id %>">
-                            <input type="hidden" name="name" value="<%= name %>">
-                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                            <button type="submit">Delete</button>
-                        </form>
+                <div class="product">
+                    <img src="<%= product.imageUrl %>" alt="<%= product.name %>" class="products-img">
+                    <div class="product-details-actions">
+                        <div class="product-info">
+                            <h2><%= product.name %></h2>
+                            <h3>$<%= product.price %></h3>
+                            <p><%= product.announce_details %></p>
+                            <p><%= product.kilometer %> km</p>
+                        </div>
+                        <div>
+                            <a class="edit-button" href="/admin/<%= user.id %>/product-edit/<%= product.id %>">Edit</a>
+                            <form action="/product-delete" method="post" class="deleteForm">
+                                <input type="hidden" name="productId" value="<%= product.id %>">
+                                <input type="hidden" name="name" value="<%= name %>">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </div>
                     </div>
-
-                    <% } %>
                 </div>
-                <% } else{ %>
-                    <h2>Added no <%= name%> yet</h2>
-                    <% } %>
-    </div>
-</main>
+            <% } %>
+        </div>
+    <% } else { %>
+        <h2>No <%= name %> added yet.</h2>
+    <% } %>
+</div>

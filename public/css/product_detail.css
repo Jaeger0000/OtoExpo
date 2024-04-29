@@ -1,0 +1,117 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+  color: #333; /* Improved readability */
+}
+
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.product-detail {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.product-image {
+  max-width: 400px;
+  height: auto;
+  margin-right: 20px;
+  border-radius: 5px; /* Rounded corners for images */
+}
+
+.product-info {
+  flex: 1;
+}
+
+.product-title {
+  font-size: 24px; /* More prominent title */
+  color: #5D5C61; /* Subtle, stylish color */
+  margin-bottom: 10px;
+}
+
+.product-price, .product-color, .product-mileage, .product-location, .product-description, .product-favorite-number {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.favorite-form, .add-comment-form, .delete-comment-form {
+  margin-top: 10px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+.add-favorite-btn {
+  background-color: #27ae60; /* A green color to signify a positive action */
+}
+
+.delete-comment-btn {
+  background-color: #c0392b; /* A red color to signify a deletion */
+}
+
+.comments-section {
+  margin-top: 20px;
+}
+
+.comment {
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.comment-text {
+  font-size: 14px; /* Smaller text for comments */
+}
+
+.no-comments {
+  text-align: center;
+  padding: 20px;
+  font-style: italic;
+  color: #888; /* Grey text to indicate absence of content */
+}
+
+.comment-textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-family: inherit; /* To ensure the font is consistent */
+}
+
+.add-comment-btn {
+  background-color: #2980b9; /* A neutral color for comment submission */
+}
+
+.main-footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  margin-top: 30px;
+}

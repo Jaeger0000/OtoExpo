@@ -10,29 +10,31 @@
         <% if (products.length > 0) { %>
             <% products.forEach((product) => { %>
                 <div class="product">
-                    <img src="<%= product.imageUrl || '/images/default.png' %>" alt="<%= product.name %>" class="products-img">
+                    <img src="<%= product.imageUrl || '/images/default.png' %>" alt="<%= product.name %>" class="product-img">
                     
                     <div class="product-info">
                         <!-- Side-by-side product details -->
                         <div class="product-details">
-                            <h2><%= product.name || 'Product Name' %></h2>
-                            <h3>Price: $<%= product.price %></h3>
-                            <p>Kilometer: <%= product.kilometer %> km</p>
-                            <p>Description: <%= product.announce_details || 'No details provided' %></p>
+                            <h2 class="product-name"><%= product.name || 'Product Name' %></h2>
+                            <p class="product-price">Price: $<%= product.price %></p>
+                            <p class="product-kilometer">Kilometer: <%= product.kilometer %> km</p>
+                            <p class="product-description">Description: <%= product.announce_details || 'No details provided' %></p>
                         </div>
 
-                        <form action="/favorite" method="post">
-                            <input type="hidden" name="productId" value="<%= product.id %>">
-                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                            <button type="submit" class="button">Add to Favorite</button>
-                        </form>
+                        <div class="button-container">
+                            <form action="/favorite" method="post" class="favorite-form">
+                                <input type="hidden" name="productId" value="<%= product.id %>">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <button type="submit" class="button favorite-button">Add to Favorite</button>
+                            </form>
 
-                        <a href="/product/<%= product.id %>" class="button">Product Details</a>
+                            <a href="/product/<%= product.id %>" class="button details-button">Product Details</a>
+                        </div>
                     </div>
                 </div>
             <% }); %>
         <% } else { %>
-            <h2>No products found.</h2>
+            <h2 class="no-products">No products found.</h2>
         <% } %>
     </div>
 </main>

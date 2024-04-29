@@ -1,18 +1,14 @@
 <%- include('../../includes/head'); %>
-    <link rel="stylesheet" href="/css/navBarCss.css">
-    <link rel="stylesheet" href="/css/product.css">
-    <link rel="stylesheet" href="/css/userSetting.css">
-    
+<link rel="stylesheet" href="/css/navBarCss.css">
+<link rel="stylesheet" href="/css/mycars.css?v=2"> <!-- Append the version query to bypass cache -->
+<link rel="stylesheet" href="/css/userSetting.css">
 
-    </head>
+</head>
 
-    <body>
-        <%- include('../../includes/nav-bar'); %>
-        <%- include('./includes/user-navbar'); %>   
-        <%- include('./includes/user-products'); %> 
-                    
+<body>
+    <%- include('../../includes/nav-bar'); %>
+    <%- include('./includes/user-navbar'); %>
+    <%- include('./includes/user-products', {name: 'cars'}); %> <!-- Passed 'cars' to the name variable -->                 
+</body>
 
-
-    </body>
-
-    </html>
+</html>
