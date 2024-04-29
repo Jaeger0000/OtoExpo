@@ -1,15 +1,269 @@
-<%- include('../includes/head');  %>
-<link rel="stylesheet" href="/css/navBarCss.css">
-<style>
-    .center{
-        text-align: center;
-        margin-top: 100px;
-    }
-</style>
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jersey+15&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/navBarCss.css">
+    <style>
+        body {
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .content {
+            height: 600px;
+            background-color: rgba(8, 27, 41, 0.7);
+            background-image: url('https://png.pngtree.com/background/20230425/original/pngtree-an-old-classic-car-is-driving-down-an-avenue-at-night-picture-image_2467665.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+
+        .content_alt {
+            height: 700px;
+            position: relative;
+            background-color: #081b29;
+            margin: 0;
+            padding: 0;
+        }
+
+        .about_logo {
+            height: 30%;
+            width: 15%;
+            background-color: #a9a9a9;
+            position: relative;
+            top: 350px;
+            left: 110px;
+            z-index: 1000;
+            background-image: url('https://brandmark.io/intro/info.png');
+            background-size: cover;
+            background-color: rgba(128, 128, 128, 1); /* Orta gri */
+            background-blend-mode: multiply;
+            animation: fadeLeft 1s ease-out forwards;
+
+        }
+
+        .letter {
+            position: relative;
+            top: 200px;
+            left: 43%;
+            opacity: 0;
+            animation: fadeLeft 1s ease-out forwards;
+        }
+
+        .letter h1 {
+            color: #a9a9a9;
+            font-size: 40px;
+            font-family: "Jersey 15", sans-serif;
+            font-weight: 600;
+            font-style: normal;
+        }
+
+        .about_icons {
+            position: absolute;
+            top: 300px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: auto;
+
+        }
+
+        .about_icons a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            background: transparent;
+            border: 2px solid #a9a9a9;
+            border-radius: 50%;
+            font-size: 20px;
+            color: #a9a9a9;
+            text-decoration: none;
+            z-index: 1;
+            overflow: hidden;
+            margin: 0 10px;
+            transition: .5s;
+            animation: fadeLeft 1s ease-out forwards;
+        }
+
+        .about_icons a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: #ededed;
+            z-index: -1;
+            transition: .5s;
+        }
+
+        a:hover::before {
+            width: 100%;
+        }
+
+        a:hover {
+            transform: scale(1.2);
+            color: #081b29;
+        }
+
+        .info {
+            width: 700px;
+            height: 400px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .info h3 {
+            font-family: "Jersey 15", sans-serif;
+            font-weight: 700;
+            font-style: normal;
+            font-size: 35px;
+            color: #a9a9a9;
+        }
+
+        .info h4 {
+            font-family: "Jersey 15", sans-serif;
+            font-weight: 500;
+            font-style: normal;
+            font-size: 20px;
+            color: #a9a9a9;
+            animation: fadeLeft 1s ease-out forwards;
+
+        }
+
+        /* Tek tek yazma animasyonu */
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink-caret {
+
+            from,
+            to {
+                border-color: transparent;
+            }
+
+            50% {
+                border-color: orange;
+            }
+
+        }
+
+        @keyframes fadeLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .altTitle {
+            font-family: "Jersey 15", sans-serif;
+            font-weight: 700;
+            font-style: normal;
+            font-size: 25px;
+            color: #a9a9a9;
+        }
+    </style>
 </head>
+
 <body>
     <%- include('../includes/nav-bar');  %>
-    <h1 class="center">ABout pageeeeeeeeee</h1>
+    <section class="content">
+        <div class="letter">
+            <h1> Oto Expo</h1>
+        </div>
+        <div class="about_logo">
+        </div>
+        <div class=""></div>
+        <div class="about_icons">
+            <a href="#"><i class='bx bxl-facebook'></i></a>
+            <a href="#"><i class='bx bxl-twitter'></i></a>
+            <a href="#"><i class='bx bxl-linkedin'></i></a>
+            <a href="#"><i class='bx bxl-instagram'></i></a>
+        </div>
+    </section>
+    <section class="content_alt">
+        <div class="info">
+            <h3> </h3>
+            <h4>
+                <br> <br><br>
+                <div class="altTitle">The Meeting Point for Automobile Enthusiasts </div>
+                <br><br>
+                OtoExpo is where a passionate journey into automobiles begins. For 20 years, we have continued to be the
+                top choice for car enthusiasts as a platform where quality vehicles, expert service, and customer
+                satisfaction converge.
+                <br><br>
+                Our story began with a passion and a vision. Years ago, we were founded by a group of automobile
+                enthusiasts, and our goal has always been the same: to offer the best vehicles at the most affordable
+                prices, turning our customers' dreams into reality.
+                <br><br>
+                OtoExpo is not just a car gallery, but also an experience. Behind every vehicle is a story, and every
+                customer has a dream. We bring these stories together and create the opportunity for everyone to own
+                their favorite car.
+                <br><br>
+                As a team, we work with passion and aim to exceed the expectations of every customer. Our experienced
+                staff will guide you at every step and help you find the perfect vehicle that suits your needs.
+                <br><br>
+                When you step into OtoExpo, you are not just entering a car gallery, but also joining a family. With our
+                high-quality service and friendly approach, we are always by your side.
+                <br><br>
+                With us, take one step closer to the car of your dreams. Come to OtoExpo and experience beyond your
+                dreams.
+            </h4>
 
+        </div>
+    </section>
 </body>
+
+</html>

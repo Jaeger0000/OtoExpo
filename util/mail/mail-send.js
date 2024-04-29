@@ -61,7 +61,7 @@ exports.sendMailForget = (email,token)=> {
             <h1>Reset Your Password</h1>
             <p>You recently requested to reset your password. To reset your password, click the button below:</p>
              <br>
-            <p><a class="btn" href="http://localhost:3000/reset-password/${token}">Reset Password</a></p>
+            <p><a class="btn" href="https://www.otoexpo.shop/reset-password/${token}">Reset Password</a></p>
             <br>
             <p>If you did not request a password reset, please ignore this email.</p>
             <p>Thank you,</p><h3>OtoExpo</h3>
@@ -129,7 +129,7 @@ exports.sendMailVerification = (email,token)=> {
           <h1>Email Verification</h1>
           <p>Thank you for signing up! To complete your registration, please click the button below to verify your email address:</p>
           <br>
-          <p><a class="btn" href="http://localhost:3000/verify/${token}">Verify Email Address</a></p>
+          <p><a class="btn" href="https://www.otoexpo.shop/verify/${token}">Verify Email Address</a></p>
           <br>
           <p>If you did not sign up for an account, you can safely ignore this email.</p>
           <h3>OtoExpo</h3>
