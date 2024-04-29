@@ -19,6 +19,7 @@ const mainPageRoutes = require('./routes/main-page');
 const authRoutes = require('./routes/auth-page');
 const userRoutes = require('./routes/user-page');
 const addProductRoutes = require('./routes/add-product');
+const adminPages = require('./routes/admin-page');
 
 
 const app = express();
@@ -41,6 +42,7 @@ app.use((req, res, next) => {
                 res.locals.user = user;
             }
             res.locals.isAuthenticated = req.session.isLoggedIn;
+            res.locals.isAdminAuthenticated = req.session.isAdminLoggedIn;
             res.locals.csrfToken = req.csrfToken();
             next();
         } catch (error) {
@@ -50,13 +52,13 @@ app.use((req, res, next) => {
     init();
 });
 
-
+app.use(adminPages);
 app.use(mainPageRoutes);
 app.use(authRoutes);
 app.use(userRoutes);
 app.use(addProductRoutes);
 app.use((req, res, next) => {
-    res.status(404).render('MainPages/404', { pageTitle: 'Page Not Found',path: '/404' });
+    res.status(404).render('MainPages/404', { pageTitle: 'Page Not Found',path: '/404', PageTitle: "404" });
 });
 
 databeseConnection;

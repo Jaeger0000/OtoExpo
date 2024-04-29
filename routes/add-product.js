@@ -13,8 +13,5 @@ router.post('/add-product/car', isLogin, addProductController.postAddProductCar)
 router.get('/add-product/motorcycle', isLogin, addProductController.getAddProductMotorcycle);
 router.post('/add-product/motorcycle', isLogin, addProductController.postAddProductMotorcycle);
 
-router.get('/add-product/building', isLogin, addProductController.getAddProductBuilding);
-router.post('/add-product/building', isLogin, addProductController.postAddProductBuilding);
-
 
 module.exports = router;

@@ -2,7 +2,6 @@
     <link rel="stylesheet" href="/css/navBarCss.css">
     <link rel="stylesheet" href="/css/userSetting.css">
     <link rel="stylesheet" href="/css/edit-product.css">
-    
 
     </head>
 
@@ -11,9 +10,9 @@
         <%- include('./includes/user-navbar'); %>   
         <main>
             <div class="container-addproduct">
-                <h1 class="h1-addproduct">Add New Car</h1>
+                <h1 class="h1-addproduct">Edit Product</h1>
                
-                <form class="form-addproduct" action="/edit-product" method="POST">
+                <form class="form-addproduct" action="/edit-product/admin" method="POST">
                     <div class="form-group-addproduct">
                         <label for="name">Title:</label>
                         <input class="inp-addproduct" type="text" id="name" name="name" value="<%= product.name %>" required>

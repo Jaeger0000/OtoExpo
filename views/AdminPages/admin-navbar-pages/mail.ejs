@@ -1,0 +1,40 @@
+<%- include('../../includes/head'); %>
+    <link rel="stylesheet" href="/css/navBarCss.css">
+    <link rel="stylesheet" href="/css/userSetting.css">
+    <link rel="stylesheet" href="/css/admin-css/mail.css">
+
+    </head>
+
+    <body>
+        <%- include('../../includes/nav-bar'); %>
+            <%- include('./includes/user-navbar'); %>
+            <main>
+                <h1>Help Mails</h1>
+                <% if(mails.length> 0){ %>
+                    <% for (let mail of mails) { %>
+                        <div class="container-data">
+                           
+                            <ul class="data-list">
+                                <li>Name: <%=mail.userFullName %>
+                                </li>
+                                <li>Email: <%= mail.userEmail %></li>
+                                <li>Title: <%= mail.title %></li>
+                                <li>Message: <%= mail.message %></li>
+                                <form action="/email-delete" method="post" class="deleteForm">
+                                    <input type="hidden" name="emailId" value="<%= mail.id %>">
+                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                    <button type="submit">Delete</button>
+                                </form>
+                            </ul>
+                        </div>
+                        
+                        <% } %>
+                            </div>
+                            <% } else{ %>
+                                <h2>Added no products yet</h2>
+                                <% } %>
+                                    </div>
+
+                                    </main>
+
+    </body>

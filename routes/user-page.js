@@ -15,7 +15,7 @@ router.get('/user/:UserId/product-edit/:productId',isLogin,userController.getEdi
 router.post('/myproduct-delete',isLogin,userController.postDeleteMyProduct);
 
 
-router.post('/edit-product/car',isLogin,userController.postEditMyCar);
+router.post('/edit-product',isLogin,userController.postEditProduct);
 
 
 router.get('/user/:UserId/account',isLogin,userController.getUser);
@@ -28,6 +28,10 @@ router.get('/user',isLogin,userController.getUserPage);
 
 router.post("/add-to-comment",isLogin, userController.postComment);
 router.post("/delete-comment",isLogin, userController.postDeleteComment);
+
+router.get("/user/:userId/help",isLogin,userController.getHelpPage);
+
+router.post("/user/:userId/help",isLogin,userController.postHelpPage);
 
 
 

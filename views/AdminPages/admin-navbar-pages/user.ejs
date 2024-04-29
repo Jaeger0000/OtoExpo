@@ -1,0 +1,51 @@
+<%- include('../../includes/head'); %>
+    <link rel="stylesheet" href="/css/navBarCss.css">
+    <link rel="stylesheet" href="/css/signup.css">
+    <link rel="stylesheet" href="/css/userSetting.css">
+
+    </head>
+
+    <body>
+        <%- include('../../includes/nav-bar'); %>
+            <main>
+                <%- include('./includes/user-navbar'); %>
+                    <div class="content-left">
+                        <!-- Sayfa içeriği buraya gelecek -->
+                        <div class="container">
+                            <% if(error){ %>
+                                <h4 class="error-message">
+                                    <%= error %>
+                                </h4>
+                                <% } %>
+                                    <h2 class="signupH2">Admin Settings</h2>
+                                    <form action="/admin-name-update" method="post">
+                                        <label for="name">Name : <%= user.name %></label>
+                                        <input type="text" id="name" name="name" required>
+                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                        <input type="submit" value="Change Name">
+                                    </form>
+                                    <form action="/admin-surname-update" method="post">
+                                        <label for="name">Surname: <%= user.surName %></label>
+                                        <input type="text" name="surName" required>
+                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                        <input type="submit" value="Change Surname">
+                                    </form>
+                                    <form action="/admin-email-update" method="post">
+                                        <label for="name">Email: <%= user.email %></label>
+                                        <input type="email" name="email"required>
+                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                        <input type="submit" value="Change Email">
+                                    </form>
+                                    <form action="/admin-password-update" method="post">
+                                        <input type="password" name="oldPassword" placeholder="Old Password" required>
+                                        <input type="password" name="password" placeholder="New Password" required>
+                                        <input type="password" name="cfrmPassword" placeholder="Confirm Password" required>
+                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                        <input type="submit" value="Change Password">
+                                    </form>
+                        </div>
+                    </div>
+
+    </body>
+
+    </html>

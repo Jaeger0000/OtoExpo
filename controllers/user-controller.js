@@ -1,6 +1,9 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 const Products = require('../models/products');
+
+const helpMail = require('../models/help-mail');
+
 const { where } = require('sequelize');
 exports.getFavorite = (req, res, next) => {
     var errormsg = req.flash('error');
@@ -17,7 +20,8 @@ exports.getFavorite = (req, res, next) => {
             res.render('UserPages/favorite', {
                 path: '/favorite',
                 error: errormsg,
-                favorites: products
+                favorites: products,
+                PageTitle: 'Favorite'
             });
 
         } catch (error) {
@@ -65,9 +69,8 @@ exports.postDeleteFavorite = async (req, res, next) => {
 
 }
 
-exports.getUser = (req, res, next) => {
+exports.getUser =async (req, res, next) => {
 
-    async function init() {
         try {
             const userId = req.params.UserId;
             const user = await User.findByPk(userId);
@@ -83,14 +86,11 @@ exports.getUser = (req, res, next) => {
             } else {
                 errormsg = null;
             }
-            res.render('UserPages/user-navbar-pages/user', { path: 'user/account', error: errormsg, user: user });
+            res.render('UserPages/user-navbar-pages/user', 
+            { path: 'user/account', error: errormsg, user: user, PageTitle: 'User'});
         } catch (error) {
             console.log(error);
         }
-
-
-    }
-    init();
 
 }
 
@@ -200,7 +200,8 @@ exports.getMyCars = async (req, res, next) => {
         }
 
         const products = await user.getProducts({ where: { type: 'car' } });
-        res.render('UserPages/user-navbar-pages/my-cars', { path: '/my-cars', products: products, name: 'cars' });
+        res.render('UserPages/user-navbar-pages/my-cars', 
+        { path: '/my-cars', products: products, name: 'cars', PageTitle: 'My Cars' });
     } catch (error) {
         console.log(error);
     }
@@ -217,7 +218,8 @@ exports.getMyMotorcycles = async (req, res, next) => {
             return res.redirect('/user/'+ userSId + '/my-motorcycles');
         }
         const products = await user.getProducts({ where: { type: 'motorcycle' } });
-        res.render('UserPages/user-navbar-pages/my-motorcycles', { path: '/my-motorcycles', products: products, name: 'motorcycles' });
+        res.render('UserPages/user-navbar-pages/my-motorcycles', 
+        { path: '/my-motorcycles', products: products, name: 'motorcycles', PageTitle: 'My Motorcycles' });
     } catch (error) {
         console.log(error);
     }
@@ -238,7 +240,8 @@ exports.getEditMyProduct = async (req, res, next) => {
         const cars = await user.getProducts({ where: { id: productId } });
         const car = cars[0];
         console.log(car);
-        res.render('UserPages/user-navbar-pages/edit-my-product', { path: '/my-cars', product: car, name: 'editt', error: errormsg });
+        res.render('UserPages/user-navbar-pages/edit-my-product', 
+        { path: '/my-cars', product: car, name: 'editt', error: errormsg, PageTitle: 'Edit Product'});
     } catch (error) {
         console.log(error);
     }
@@ -270,13 +273,14 @@ exports.postEditMyProduct = async (req, res, next) => {
 
 exports.postDeleteMyProduct = async (req, res, next) => {
     const productId = req.body.productId;
+    const name = req.body.name;
     try {
         const user = await User.findByPk(req.session.user.id);
         const products = await user.getProducts({ where: { id: productId } });
         const product = products[0];
         await product.destroy();
         await product.save();
-        res.redirect('/user/' + req.session.user.id + '/my-cars');
+        res.redirect('/user/' + req.session.user.id + '/my-' +name );
     } catch (error) {
         console.log(error);
     }
@@ -285,7 +289,7 @@ exports.postDeleteMyProduct = async (req, res, next) => {
 
 
 
-exports.postEditMyCar = async (req, res, next) => {
+exports.postEditProduct = async (req, res, next) => {
 
     const productId = req.body.productId;
     const name = req.body.name;
@@ -336,6 +340,45 @@ exports.postDeleteComment = async (req, res, next) => {
         await comment.destroy();
         await comment.save();
         res.redirect('/product/' + productId);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+exports.getHelpPage = async (req, res, next) => {
+    const userId = req.params.userId;
+    //userın maili , userın ad soyadı
+    try {
+        var errormsg = req.flash('error');
+        if (errormsg.length > 0) {
+            errormsg = errormsg[0];
+        } else {
+            errormsg = null;
+        }
+
+        const user = await User.findByPk(userId);
+        const userMail = user.email;
+        const userFullName = user.name + ' ' + user.surName;
+        res.render("UserPages/user-navbar-pages/help",{path: '/help',
+         userMail: userMail, userFullName: userFullName, error: errormsg, PageTitle: 'Help'});
+        
+    } catch (error) {
+        
+    }
+
+}
+exports.postHelpPage = async (req, res, next) => {
+    const userId = req.params.userId;
+    const title = req.body.title;
+    const message = req.body.message;
+    try {
+        const user = await User.findByPk(userId);
+        const userFullName = user.name + ' ' + user.surName;
+        const userEmail = user.email;
+        await helpMail.create({ title: title, message: message , userFullName: userFullName,
+         userEmail: userEmail});
+         req.flash('error',"Email sended please check your email to response");
+        res.redirect('/user/' + userId + '/help');
     } catch (error) {
         console.log(error);
     }

@@ -50,6 +50,10 @@ const Products = sequelize.define("products", {
     type: Sequelize.TEXT,
     allowNull: false,
   },
+  adress: {
+    type: Sequelize.TEXT,
+    allowNull: false,
+  },
 });
 
 module.exports = Products;

@@ -9,7 +9,7 @@
                         <h2>
                             <%= product.name %>
                         </h2>
-                        <img src="<%= product.imageUrl %>" alt="<%= product.name %>">
+                        <img src="<%= product.imageUrl %>" alt="<%= product.id %>" class="products-img">
                         <h3>
                             <%= product.price %>
                         </h3>
@@ -20,8 +20,8 @@
                         <p>
                             <%= product.kilometer %>
                         </p>
-                        <a class="edit-button" href="/user/<%= user.id %>/product-edit/<%= product.id %>">Edit</a>
-                        <form action="/myproduct-delete" method="post" class="deleteForm">
+                        <a class="edit-button" href="/admin/<%= user.id %>/product-edit/<%= product.id %>">Edit</a>
+                        <form action="/product-delete" method="post" class="deleteForm">
                             <input type="hidden" name="productId" value="<%= product.id %>">
                             <input type="hidden" name="name" value="<%= name %>">
                             <input type="hidden" name="_csrf" value="<%= csrfToken %>">

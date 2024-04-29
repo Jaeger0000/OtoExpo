@@ -99,6 +99,15 @@ body, ul {
     border-radius: 5px; /* Rounded corners */
     margin-bottom: 10px; /* Margin at the bottom */
   }
+  .success-message {
+    text-align: center;
+    /* background-color: #04fc00; */
+    color: green; 
+    padding: 10px; 
+    /* border: 1px solid #14cc0e;  */
+    border-radius: 5px; 
+    margin-bottom: 10px; 
+  }
 
 
 

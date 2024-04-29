@@ -14,7 +14,8 @@ exports.getSignup = (req, res, next) => {
 
     res.render('AuthPages/signup', {
         path: '/signup',
-        error: errormsg
+        error: errormsg,
+        PageTitle: 'Signup'
     });
 }
 exports.postSignup = async (req, res, next) => {
@@ -85,7 +86,8 @@ exports.getVerify = async (req, res, next) => {
     await user.save();
     res.render('AuthPages/verified-page', {
         path: '/signup',
-        error: errormsg
+        error: errormsg,
+        PageTitle: 'Verify'
     });
 }
 exports.getLogin = (req, res, next) => {
@@ -98,7 +100,8 @@ exports.getLogin = (req, res, next) => {
 
     res.render('AuthPages/login', {
         path: '/login',
-        error: errormsg
+        error: errormsg,
+        PageTitle: 'Login'
     });
 }
 
@@ -144,7 +147,7 @@ exports.getForgetPass = (req, res, next) => {
     } else {
         errormsg = null;
     }
-    res.render('AuthPages/forget-pass', { path: '/forgetPass', error: errormsg });
+    res.render('AuthPages/forget-pass', { path: '/forgetPass', error: errormsg , PageTitle: 'Forget Password'});
 }
 exports.postForgetPass = async (req, res, next) => {
     const email = req.body.email;
@@ -182,7 +185,8 @@ exports.getResetPass = async (req, res, next) => {
     } else {
         errormsg = null;
     }
-    res.render('AuthPages/reset-password', { path: '/reset-password', error: errormsg, userId: user.id, token: token });
+    res.render('AuthPages/reset-password', 
+    { path: '/reset-password', error: errormsg, userId: user.id, token: token, PageTitle: 'Reset Password'});
 }
 
 exports.postResetPass = async (req, res, next) => {
