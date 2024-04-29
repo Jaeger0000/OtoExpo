@@ -1,40 +1,39 @@
-<%- include('../includes/head');  %>
-<link rel="stylesheet" href="css/product.css">
-
+<%- include('../includes/head'); %>
+<link rel="stylesheet" href="/css/product.css">
 </head>
 <body>
-<%- include('../includes/nav-bar');  %>
+<%- include('../includes/nav-bar'); %>
+
 <main>
     <div class="container">
-        
-    <% if(products.length > 0){ %>
-    <% for (let product of products) { %>
-        
-        <div class="product-list">
-          <div class="product">
-            <h2><%= product.name %></h2>
-            <img src="<%= product.imageUrl %>" alt="<%= product.id %>" class="products-img">
-            
-            <h3><%= product.price %></h3>
-            <p><%= product.announce_details  %></p>
+        <% if (products.length > 0) { %>
+            <% products.forEach((product) => { %>
+                <div class="product">
+                    <img src="<%= product.imageUrl || '/images/default.png' %>" alt="<%= product.name %>" class="products-img">
+                    
+                    <div class="product-info">
+                        <!-- Side-by-side product details -->
+                        <div class="product-details">
+                            <h2><%= product.name || 'Product Name' %></h2>
+                            <h3>Price: $<%= product.price %></h3>
+                            <p>Kilometer: <%= product.kilometer %> km</p>
+                            <p>Description: <%= product.announce_details || 'No details provided' %></p>
+                        </div>
 
-            <p><%= product.kilometer %></p>
-            <form action="/favorite" method="post" >
-                <input type="hidden" name="productId" value="<%= product.id %>">
-                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                <button type="submit" >Add to favorite</button>
-            </form>
-            <br>
-            <a href="/product/<%= product.id %>" class="button">Product Details</a>
-          </div>
-          <!-- Add more product items as needed -->
-        
-    <% } %>
-</div>
-        <% } else{ %>
-        <h2>Added no products yet</h2>
+                        <form action="/favorite" method="post">
+                            <input type="hidden" name="productId" value="<%= product.id %>">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <button type="submit" class="button">Add to Favorite</button>
+                        </form>
+
+                        <a href="/product/<%= product.id %>" class="button">Product Details</a>
+                    </div>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <h2>No products found.</h2>
         <% } %>
-        </div>
+    </div>
 </main>
 
 </body>

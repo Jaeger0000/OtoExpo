@@ -1,6 +1,6 @@
 <%- include('../includes/head');  %>
 <link rel="stylesheet" href="/css/navBarCss.css">
-<link rel="stylesheet" href="/css/product.css">
+<link rel="stylesheet" href="/css/favourite.css">
 
 </head>
 <body>
@@ -9,30 +9,31 @@
   <% if(error){ %>
     <h4 class="error-message"><%= error %></h4>
 <%  } %>
+    <div class="container">
     <% if(favorites.length > 0){ %>
-    <% for (let favorite of favorites) { %>
-        <div class="container">
-        <h2><%=  favorite.name %></h2>
-        <div class="product-list">
+      <div class="product-list">
+        <% for (let favorite of favorites) { %>
           <div class="product">
-            <img src="<%= favorite.imageUrl %>" alt="Product 1">
-            <h3><%= favorite.model %></h3>
-            <h3><%= favorite.color %></h3>
-            <p><%= favorite.price %></p>
+            <img src="<%= favorite.imageUrl %>" alt="<%= favorite.name %>">
+            <div class="product-details">
+              <h3><%= favorite.name %></h3>
+              <h3><%= favorite.model %></h3>
+              <p><%= favorite.color %></p>
+              <p><%= favorite.price %></p>
+            </div>
             <form action="/delete-favorite" method="post">
               <input type="hidden" name="productId" value="<%= favorite.id %>">
               <input type="hidden" name="_csrf" value="<%= csrfToken %>">
               <button type="submit">Delete</button>
             </form>
           </div>
-          <!-- Add more product items as needed -->
-        </div>
-    <% } %>
-        <% } else{ %>
-        <h2>Added no favorites yet</h2>
         <% } %>
-        </div>
+      </div>
+    <% } else { %>
+      <h2>No favorites added yet</h2>
+    <% } %>
+    </div>
 </main>
 
 </body>
-</html
+</html>

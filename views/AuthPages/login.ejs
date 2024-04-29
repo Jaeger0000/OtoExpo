@@ -2,14 +2,14 @@
 <link rel="stylesheet" href="/css/login.css">
 
 </head>
-<body>
+<body class="login_body">
 <%- include('../includes/nav-bar');  %>
 <main>
 <div class="container">
     <% if(error){ %>
         <h4 class="error-message"><%= error %></h4>
     <%  } %>
-  <h2>Login</h2>
+  <h2 class="login_text">Login</h2>
   <form action="/login" method="post">
     <input type="email" name="email" placeholder="Email" required>
     <input type="password" name="password" placeholder="Password" required>
