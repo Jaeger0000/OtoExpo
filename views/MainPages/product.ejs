@@ -27,7 +27,9 @@
             <p><strong>Mileage:</strong>
               <%= product.kilometer %> kilometer
             </p>
-            <p><strong>Location:</strong> <%= product.adress %></p>
+            <p><strong>Location:</strong>
+              <%= product.adress %>
+            </p>
             <p><strong>Description:</strong>
               <%= product.announce_details %>
             </p>
@@ -44,10 +46,8 @@
 
               <% if(comments.length> 0){ %>
                 <% for (let comment of comments) { %>
-
                   <div>
                     <div>
-
                       <p>
                         <%= comment.userFullName %> : <%= comment.comment %>
                       </p>
@@ -57,10 +57,18 @@
                           <input type="hidden" name="productId" value="<%= product.id %>">
                           <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                           <button type="submit">Delete</button>
+                        </form>
+                        <% } %>
+                        <% if(isAdmin) {%>
+                          <form action="/admin-delete-comment" method="post">
+                            <input type="hidden" name="commentId" value="<%= comment.id %>">
+                            <input type="hidden" name="productId" value="<%= product.id %>">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <button type="submit">Delete</button>
                           </form>
                           <% } %>
 
-                            <% } %>
+                          <% } %>
                     </div>
                     <% } else{ %>
                       <h2>Added no comments yet</h2>

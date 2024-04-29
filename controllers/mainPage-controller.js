@@ -2,6 +2,7 @@
 const Products = require('../models/products');
 const Comment = require('../models/comment');
 const FavoriteItem = require('../models/favorite-item');
+const Admin = require('../models/admin');
 
 exports.getIndex = (req, res, next) => {
     var errormsg = req.flash('error');
@@ -76,7 +77,12 @@ exports.getProduct =async (req, res, next) => {
             if(req.session.user){
                 userId = req.session.user.id;
             }
-            res.render('MainPages/product',{path:'/product',error: errormsg,product: product, comments: comments, favoriteNumber: favorite.length, userId: userId, PageTitle: "Product"});
+            const admin = await Admin.findByPk(userId);
+            var isAdmin = false;
+            if(admin){
+                isAdmin = true;
+            }
+            res.render('MainPages/product',{path:'/product',error: errormsg,product: product, comments: comments, favoriteNumber: favorite.length, userId: userId, PageTitle: "Product", isAdmin: isAdmin});
         } catch (error) {
             console.log(error);
         }

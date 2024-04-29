@@ -3,6 +3,7 @@ const Products = require('../models/products');
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 const HelpMail = require('../models/help-mail');
+const Comment = require('../models/comment');
 
 exports.getLogin = (req, res, next) => {
     var errormsg = req.flash('error');
@@ -263,6 +264,19 @@ exports.emailDelete = async (req, res, next) => {
         await email.destroy();
         await email.save();
         res.redirect('/admin/' + req.session.user.id + '/mails' );
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.postDeleteComment = async (req, res, next) => {
+    const commentId = req.body.commentId;
+    const productId = req.body.productId;
+    try {
+        const comments = await Comment.findAll({ where: { id: commentId } });
+        const comment = comments[0];
+        await comment.destroy();
+        await comment.save();
+        res.redirect('/product/' + productId);
     } catch (error) {
         console.log(error);
     }

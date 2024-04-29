@@ -32,4 +32,6 @@ router.get('/admin/:UserId/account',isLogin,adminController.getAdmin);
 router.get("/admin/:userId/mails",isLogin,adminController.getMails);
 router.post('/email-delete',isLogin,adminController.emailDelete);
 
+router.post("/admin-delete-comment",isLogin, adminController.postDeleteComment);
+
 module.exports = router;
