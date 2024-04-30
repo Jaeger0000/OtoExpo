@@ -395,8 +395,7 @@ exports.postEditProduct = async (req, res, next) => {
 }
 exports.getMails = async (req, res, next) => {
     try {
-        const mails = await HelpMail.findAll();
-
+        const mails = await HelpMail.findAll({order: [['createdAt', 'ASC']]});
         res.render('AdminPages/admin-navbar-pages/mail',
             { path: '/mails', PageTitle: 'Mails', mails: mails });
     } catch (error) {
