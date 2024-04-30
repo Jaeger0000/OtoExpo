@@ -3,6 +3,7 @@ const Products = require('../models/products');
 const Comment = require('../models/comment');
 const FavoriteItem = require('../models/favorite-item');
 const Admin = require('../models/admin');
+const HelpMail = require('../models/help-mail');
 
 exports.getIndex = (req, res, next) => {
     var errormsg = req.flash('error');
@@ -88,8 +89,35 @@ exports.getProduct =async (req, res, next) => {
         }
 }
 exports.getContact = (req, res, next) => {
-    res.render('MainPages/contact',{path:'/contact', PageTitle: "Contact"});
+    var errormsg = req.flash('error');
+    if (errormsg.length > 0) {
+        errormsg = errormsg[0];
+    } else {
+        errormsg = null;
+    }
+    res.render('MainPages/contact',{path:'/contact', PageTitle: "Contact", error: errormsg});
 }
 exports.getAbout = (req, res, next) => {
     res.render('MainPages/about',{path:'/about', PageTitle: "About"});
+}
+
+
+exports.postContact = async (req, res, next) => {
+    const name = req.body.name;
+    const email = req.body.email;
+    const title = req.body.title;
+    const message = req.body.message;
+    try {
+        const helpMail = await HelpMail.create({
+            title: title,
+            message: message,
+            name: name,
+            email: email
+        });
+        await helpMail.save();
+        req.flash('error', 'Message sent successfully');
+        res.redirect('/contact');
+    } catch (error) {
+        console.log(error);
+    }
 }

@@ -9,16 +9,12 @@
     <% if(error){ %>
         <h4 class="error-message"><%= error %></h4>
     <%  } %>
-  <h2>Admin Login</h2>
-  <form action="/admin-login" method="post">
+  <h2>Admin Forget Password</h2>
+  <form action="/admin-forget-password" method="post">
     <input type="email" name="email" placeholder="Email" required>
-    <input type="password" name="password" placeholder="Password" required>
     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-    <input type="submit" value="Admin login">
+    <input type="submit" value="Send reset link">
   </form>
-  <div class="text-center">
-    <a href="/admin-forget-password">Forgot password?</a>
-  </div>
 </div>
 </main>
 

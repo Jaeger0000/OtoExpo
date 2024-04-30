@@ -7,8 +7,17 @@ const isLogin = require('../middleware/isLogin');
 
 const router = express.Router();
 
+router.get('/admin-signup',isNotLogin,adminController.getSignup);
+router.post('/admin-signup',isNotLogin,adminController.postSignup);
+
 router.get('/admin-login',isNotLogin,adminController.getLogin);
 router.post('/admin-login',isNotLogin,adminController.postLogin);
+
+router.get('/admin-forget-password',isNotLogin,adminController.getForgetPass);
+router.post('/admin-forget-password',isNotLogin,adminController.postForgetPass);
+
+router.get('/admin-reset-password/:token',isNotLogin,adminController.getResetPass);
+router.post('/admin-reset-password',isNotLogin,adminController.postResetPass);
 
 router.post('/admin-name-update',isLogin,adminController.postNameUpdate);
 router.post('/admin-surname-update',isLogin,adminController.postSurnameUpdate);

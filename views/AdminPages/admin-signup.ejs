@@ -1,0 +1,29 @@
+<%- include('../includes/head');  %>
+<link rel="stylesheet" href="/css/signup.css">
+
+</head>
+<body class="signup_body">
+<%- include('../includes/nav-bar');  %>
+<main>
+
+<div class="container">
+    <% if(error){ %>
+    <h4 class="error-message"><%= error %></h4>
+    <%  } %>
+  <h2 class="signupH2">Admin Signup</h2>
+  <form action="/admin-signup" method="post">
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="text" name="surName" placeholder="Surname" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <input type="password" name="cfrmPassword" placeholder="Confirm Password" required>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <input type="submit" value="Signup">
+  </form>
+  <div class="text-center text-small">
+    Already have an account? <a href="/admin-login">Admin Login</a>
+  </div>
+</div>
+</main>
+</body>
+</html>

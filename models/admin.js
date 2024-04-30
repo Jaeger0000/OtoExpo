@@ -23,7 +23,13 @@ const Admin = sequelize.define('admin',{
     password:{
         type: Sequelize.STRING,
         allowNull: false,
-    }
+    },
+    resetToken:{
+        type: Sequelize.STRING
+    },
+    resetTokenExpiration:{
+        type: Sequelize.DATE
+    },
 });
 
 module.exports = Admin;

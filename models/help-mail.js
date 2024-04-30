@@ -17,14 +17,14 @@ const HelpMail = sequelize.define('helpMail',{
         type: Sequelize.STRING,
         allowNull:true
     },
-    userFullName: {
+    name: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    userEmail: {
+    email: {
         type: Sequelize.STRING,
         allowNull: false
-    },
+    }
 });   
 
 module.exports = HelpMail;

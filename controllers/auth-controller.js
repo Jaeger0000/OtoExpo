@@ -47,7 +47,7 @@ exports.postSignup = async (req, res, next) => {
         });
         user.verifyToken = token;
         user.verifyTokenExpiration = Date.now() + 3600000;
-        mailSend.sendMailVerification(email,token);
+        mailSend.sendMailVerification(email, token);
         await user.save();
         await user.createFavorite();
         req.flash('error', 'You need to verify your account to register successfully');
@@ -105,7 +105,7 @@ exports.getLogin = (req, res, next) => {
     });
 }
 
-exports.postLogin = (req, res, next) => {
+exports.postLogin = (req, res, next) => { //
     async function compareUser() {
         try {
             const email = req.body.email;
@@ -124,6 +124,12 @@ exports.postLogin = (req, res, next) => {
             }
             req.session.user = user;
             req.session.isLoggedIn = true;
+            await sleep(1000); // delay for 1 second to update the session
+            function sleep(ms) {
+                return new Promise((resolve) => {
+                    setTimeout(resolve, ms);
+                });
+            }
             await res.redirect('/');
         } catch (error) {
             console.log(error);
@@ -133,7 +139,7 @@ exports.postLogin = (req, res, next) => {
 
 }
 
-exports.postLogout =async (req, res, next) => {
+exports.postLogout = async (req, res, next) => {
     await req.session.destroy((err) => {
         console.log(err);
         res.redirect('/');
@@ -147,7 +153,7 @@ exports.getForgetPass = (req, res, next) => {
     } else {
         errormsg = null;
     }
-    res.render('AuthPages/forget-pass', { path: '/forgetPass', error: errormsg , PageTitle: 'Forget Password'});
+    res.render('AuthPages/forget-pass', { path: '/forgetPass', error: errormsg, PageTitle: 'Forget Password' });
 }
 exports.postForgetPass = async (req, res, next) => {
     const email = req.body.email;
@@ -185,8 +191,8 @@ exports.getResetPass = async (req, res, next) => {
     } else {
         errormsg = null;
     }
-    res.render('AuthPages/reset-password', 
-    { path: '/reset-password', error: errormsg, userId: user.id, token: token, PageTitle: 'Reset Password'});
+    res.render('AuthPages/reset-password',
+        { path: '/reset-password', error: errormsg, userId: user.id, token: token, PageTitle: 'Reset Password' });
 }
 
 exports.postResetPass = async (req, res, next) => {

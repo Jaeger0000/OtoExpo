@@ -1,0 +1,277 @@
+body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.content {
+    height: 600px;
+    background-color: rgba(8, 27, 41, 0.7);
+    background-image: url('https://png.pngtree.com/background/20230425/original/pngtree-an-old-classic-car-is-driving-down-an-avenue-at-night-picture-image_2467665.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+}
+
+.content_alt {
+    height: 800px;
+    position: relative;
+    background-color: #081b29;
+    margin: 0;
+    padding: 0;
+}
+
+.about_logo {
+    height: 30%;
+    width: 15%;
+    position: relative;
+    top: 350px;
+    left: 110px;
+    z-index: 1000;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2rqo24bn4V6ZQPARAIwg21IEfWZ5Q3SrXbKHKL2awpw&s');
+    background-size: cover;
+    background-color: rgba(128, 128, 128, 1);
+    /* Orta gri */
+    background-blend-mode: multiply;
+    animation: fadeLeft 1s ease-out forwards;
+
+}
+
+.letter {
+    position: relative;
+    top: 200px;
+    left: 43%;
+    opacity: 0;
+    animation: fadeLeft 1s ease-out forwards;
+}
+
+.letter h1 {
+    color: #a9a9a9;
+    font-size: 40px;
+    font-family: "Jersey 15", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.about_icons {
+    position: absolute;
+    top: 300px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+
+}
+
+.about_icons a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid #a9a9a9;
+    border-radius: 50%;
+    font-size: 20px;
+    color: #a9a9a9;
+    text-decoration: none;
+    z-index: 1;
+    overflow: hidden;
+    margin: 0 10px;
+    transition: .5s;
+    animation: fadeLeft 1s ease-out forwards;
+}
+
+.about_icons a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: #ededed;
+    z-index: -1;
+    transition: .5s;
+}
+
+a:hover::before {
+    width: 100%;
+}
+
+a:hover {
+    transform: scale(1.2);
+    color: #081b29;
+}
+
+.info {
+    width: 700px;
+    height: 400px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.info h3 {
+    font-family: "Jersey 15", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 35px;
+    color: #a9a9a9;
+}
+
+.info h4 {
+    font-family: "Jersey 15", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 20px;
+    color: #a9a9a9;
+    animation: fadeLeft 1s ease-out forwards;
+
+}
+
+/* Tek tek yazma animasyonu */
+@keyframes typing {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink-caret {
+
+    from,
+    to {
+        border-color: transparent;
+    }
+
+    50% {
+        border-color: orange;
+    }
+
+}
+
+@keyframes fadeLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.altTitle {
+    font-family: "Jersey 15", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 25px;
+    color: #a9a9a9;
+}
+.navbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+  /* Contact information container */
+  .contact-info {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+/* Individual contact items */
+.contact-item {
+    flex-basis: 30%;
+    text-align: center;
+    padding: 20px;
+    color: #a9a9a9;
+}
+
+/* Icons for contact items */
+.contact-item i {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+/* Style the contact form */
+.contact-form {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+}
+
+.contact-form h3 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.contact-form .form-group {
+    margin-bottom: 15px;
+}
+
+.contact-form .form-group label {
+    display: block;
+    color: #666;
+}
+
+.contact-form .form-group input,
+.contact-form .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    font-family: "Poppins", sans-serif;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.contact-form button {
+    width: 100%;
+    padding: 15px;
+    font-family: "Poppins", sans-serif;
+    background: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.contact-form button:hover {
+    background: #4cae4c;
+}

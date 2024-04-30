@@ -4,6 +4,67 @@ const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 const HelpMail = require('../models/help-mail');
 const Comment = require('../models/comment');
+const mailSend = require('../util/mail/mail-send');
+const crypto = require('crypto');
+const { Op } = require('sequelize');
+
+exports.getSignup = (req, res, next) => {
+    var errormsg = req.flash('error');
+    if (errormsg.length > 0) {
+        errormsg = errormsg[0];
+    } else {
+        errormsg = null;
+    }
+
+    res.render('AdminPages/admin-signup', {
+        path: '/admin-signup',
+        error: errormsg,
+        PageTitle: 'Admin Signup'
+    });
+}
+exports.postSignup = async (req, res, next) => {
+    try {
+        const name = req.body.name;
+        const surName = req.body.surName;
+        const email = req.body.email;
+        const password = req.body.password;
+        const cfrmPassword = req.body.cfrmPassword;
+        if (password !== cfrmPassword) {
+            req.flash('error',
+                'Passwords do not match');
+            return res.redirect('/admin-signup');
+        }
+
+        const existsAdmin = await Admin.findOne({ where: { email: email } });
+        if (existsAdmin) {
+            req.flash('error',
+                'Email already exists. Please enter a different email address');
+            return res.redirect('/admin-signup');
+        }
+        const adminMail = ["oguzhanceviz68@gmail.com",
+            "tolgacevhan@gmail.com",
+            "berk579.32@gmail.com",
+            "huseyindonmez588@gmail.com"];
+        if (!adminMail.includes(email)) {
+            req.flash('error',
+                'You are not authorized to register as an admin');
+            return res.redirect('/admin-signup');
+        }
+        const passwordcrypt = bcrypt.hashSync(password, 12);
+        const admin = await Admin.create({
+            name: name,
+            surName: surName,
+            email: email,
+            password: passwordcrypt,
+        });
+        await admin.save();
+
+        res.redirect('/admin-login');
+    } catch (error) {
+        console.log(error);
+    }
+
+}
 
 exports.getLogin = (req, res, next) => {
     var errormsg = req.flash('error');
@@ -36,10 +97,98 @@ exports.postLogin = async (req, res, next) => {
         }
         req.session.user = admin;
         req.session.isAdminLoggedIn = true;
+        await sleep(1000); // delay for 1 second to update the session
+        function sleep(ms) {
+            return new Promise((resolve) => {
+                setTimeout(resolve, ms);
+            });
+        }
         await res.redirect('/');
     } catch (error) {
         console.log(error);
     }
+}
+
+exports.getForgetPass = (req, res, next) => {
+    var errormsg = req.flash('error');
+    if (errormsg.length > 0) {
+        errormsg = errormsg[0];
+    } else {
+        errormsg = null;
+    }
+    res.render('AdminPages/forget-pass', { path: '/forgetPass', error: errormsg, PageTitle: 'Admin Forget Password' });
+}
+
+exports.postForgetPass = async (req, res, next) => {
+    const email = req.body.email;
+    const admin = await Admin.findOne({ where: { email: email } });
+    if (!admin) {
+        req.flash('error', 'The entered email not exists');
+        return res.redirect('/admin-forget-password');
+    }
+    const buffer = crypto.randomBytes(32);
+    const token = buffer.toString('hex');
+    admin.resetToken = token;
+    admin.resetTokenExpiration = Date.now() + 3600000;
+    await admin.save();
+    mailSend.sendAdminMailForget(email, token);
+    res.redirect('/admin-login');
+}
+
+exports.getResetPass = async (req, res, next) => {
+    const token = req.params.token;
+    const admin = await Admin.findOne({
+        where: {
+            resetToken: token,
+            resetTokenExpiration: {
+                [Op.gt]: Date.now()
+            }
+        }
+    });
+    if (!admin) {
+        req.flash('error', "The link is invalid or expired");
+        return res.redirect('/admin-forget-password');
+    }
+    var errormsg = req.flash('error');
+    if (errormsg.length > 0) {
+        errormsg = errormsg[0];
+    } else {
+        errormsg = null;
+    }
+    res.render('AdminPages/reset-password',
+        { path: '/reset-password', error: errormsg, adminId: admin.id, token: token, PageTitle: 'Admin Reset Password' });
+}
+
+exports.postResetPass = async (req, res, next) => {
+    const adminId = req.body.adminId;
+    const password = req.body.password;
+    const cfrmPassword = req.body.cfrmPassword;
+    const token = req.body.token;
+    if (password !== cfrmPassword) {
+        req.flash('error', "Passwords do not match");
+        return res.redirect(`/admin-reset-password/${token}`);
+    }
+    const admin = await Admin.findOne({
+        where: {
+            id: adminId,
+            resetToken: token,
+            resetTokenExpiration: {
+                [Op.gt]: Date.now()
+            }
+        }
+    });
+    if (!admin) {
+        req.flash('error', 'User not found');
+        return res.redirect('/admin-login');
+    }
+    const passwordcrypt = bcrypt.hashSync(password, 12);
+    admin.password = passwordcrypt;
+    admin.resetToken = null;
+    admin.resetTokenExpiration = null;
+    await admin.save();
+    req.flash('error', "Password reset mail send successfully");
+    res.redirect('/admin-login');
+
 }
 exports.getAdmin = async (req, res, next) => {
 
@@ -152,15 +301,15 @@ exports.getAllCars = async (req, res, next) => {
         const userSId = req.session.user.id;
         const user = await User.findByPk(userId);
         if (user === null) {
-            return res.redirect('/user/'+ userSId + '/my-cars');
+            return res.redirect('/user/' + userSId + '/my-cars');
         }
         if (user.id !== req.session.user.id) {
-            return res.redirect('/user/'+ userSId + '/my-cars');
+            return res.redirect('/user/' + userSId + '/my-cars');
         }
 
         const products = await Products.findAll({ where: { type: 'car' } });
-        res.render('AdminPages/admin-navbar-pages/all-cars', 
-        { path: '/all-cars', products: products, name: 'cars', PageTitle: 'All Cars' });
+        res.render('AdminPages/admin-navbar-pages/all-cars',
+            { path: '/all-cars', products: products, name: 'cars', PageTitle: 'All Cars' });
     } catch (error) {
         console.log(error);
     }
@@ -171,14 +320,14 @@ exports.getAllMotorcycles = async (req, res, next) => {
         const userSId = req.session.user.id;
         const user = await User.findByPk(userId);
         if (user === null) {
-            return res.redirect('/user/'+ userSId + '/my-motorcycles');
+            return res.redirect('/user/' + userSId + '/my-motorcycles');
         }
         if (user.id !== req.session.user.id) {
-            return res.redirect('/user/'+ userSId + '/my-motorcycles');
+            return res.redirect('/user/' + userSId + '/my-motorcycles');
         }
         const products = await Products.findAll({ where: { type: 'motorcycle' } });
-        res.render('AdminPages/admin-navbar-pages/all-motorcycles', 
-        { path: '/all-motorcycles', products: products, name: 'motorcycles', PageTitle: 'All Motorcycles' });
+        res.render('AdminPages/admin-navbar-pages/all-motorcycles',
+            { path: '/all-motorcycles', products: products, name: 'motorcycles', PageTitle: 'All Motorcycles' });
     } catch (error) {
         console.log(error);
     }
@@ -192,7 +341,7 @@ exports.postDeleteProduct = async (req, res, next) => {
         const product = products[0];
         await product.destroy();
         await product.save();
-        res.redirect('/admin/' + req.session.user.id + '/all-'+name );
+        res.redirect('/admin/' + req.session.user.id + '/all-' + name);
     } catch (error) {
         console.log(error);
     }
@@ -210,8 +359,8 @@ exports.getEditProduct = async (req, res, next) => {
     try {
         const cars = await Products.findAll({ where: { id: productId } });
         const car = cars[0];
-        res.render('AdminPages/admin-navbar-pages/edit-product', 
-        { path: '/all-cars', product: car, name: 'edit', error: errormsg, PageTitle: 'Edit Product'});
+        res.render('AdminPages/admin-navbar-pages/edit-product',
+            { path: '/all-cars', product: car, name: 'edit', error: errormsg, PageTitle: 'Edit Product' });
     } catch (error) {
         console.log(error);
     }
@@ -247,9 +396,9 @@ exports.postEditProduct = async (req, res, next) => {
 exports.getMails = async (req, res, next) => {
     try {
         const mails = await HelpMail.findAll();
-        
-        res.render('AdminPages/admin-navbar-pages/mail', 
-        { path: '/mails', PageTitle: 'Mails', mails: mails });
+
+        res.render('AdminPages/admin-navbar-pages/mail',
+            { path: '/mails', PageTitle: 'Mails', mails: mails });
     } catch (error) {
         console.log(error);
     }
@@ -263,7 +412,7 @@ exports.emailDelete = async (req, res, next) => {
         const email = emails[0];
         await email.destroy();
         await email.save();
-        res.redirect('/admin/' + req.session.user.id + '/mails' );
+        res.redirect('/admin/' + req.session.user.id + '/mails');
     } catch (error) {
         console.log(error);
     }

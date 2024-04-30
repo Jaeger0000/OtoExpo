@@ -33,7 +33,7 @@ Products.belongsToMany(Favorite, {through: FavoriteItem});
 
 async function  init() {
     try {
-        await sequelize.sync({alter: true});
+        await sequelize.sync();
     } catch (error) {
         console.log(error);
     }

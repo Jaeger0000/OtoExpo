@@ -13,6 +13,8 @@ router.get('/product/:productId',mainPageController.getProduct);
 router.get('/contact',mainPageController.getContact);
 router.get('/about',mainPageController.getAbout);
 
+router.post('/contact',mainPageController.postContact);
+
 
 router.get('/',mainPageController.getIndex);
 
