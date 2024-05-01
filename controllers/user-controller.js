@@ -5,6 +5,7 @@ const Products = require('../models/products');
 const helpMail = require('../models/help-mail');
 
 const { where } = require('sequelize');
+const Comment = require('../models/comment');
 exports.getFavorite = (req, res, next) => {
     var errormsg = req.flash('error');
     if (errormsg.length > 0) {
@@ -350,6 +351,11 @@ exports.postDeleteComment = async (req, res, next) => {
     try {
         const user = await User.findByPk(req.session.user.id);
         const comments = await user.getComments({ where: { id: commentId } });
+        const replies = await Comment.findAll({where: {replyToComment: commentId}});
+        for (const reply of replies) {
+            await reply.destroy();
+            await reply.save();
+        }
         const comment = comments[0];
         await comment.destroy();
         await comment.save();
