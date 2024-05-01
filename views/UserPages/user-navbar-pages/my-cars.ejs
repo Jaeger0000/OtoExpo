@@ -11,14 +11,14 @@
 
     <div class="container">
         <div class="product-list">
-            <% products.forEach(product => { %> <!-- Assuming 'products' is the array containing car data -->
+            <% products.forEach(product => { %> 
                 <div class="product">
                     <img src="<%= product.imageUrl %>" alt="<%= product.name %>" class="products-img">
                     <div class="product-info">
                         <h2><%= product.name %></h2>
                         <p>Price: $<%= product.price %></p>
                         <p>Kilometer: <%= product.kilometer %> km</p>
-                        <p>Description: <%= product.description %></p>
+                        <p>Description: <%= product.announce_details %></p>
                     </div>
                     <div class="action-buttons">
                         <a href="/user/<%= user.id %>/product-edit/<%= product.id %>" class="edit-button">Edit</a>

@@ -1,0 +1,106 @@
+.my-motorcycles-page {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .my-motorcycles-page .container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+  }
+  
+  .my-motorcycles-page .product-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .my-motorcycles-page .product {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: row; /* Change to row for horizontal layout */
+    align-items: center; /* Align items centrally */
+    padding: 10px;
+  }
+  
+  .my-motorcycles-page .products-img {
+    width: 150px; /* Adjust width for compact view */
+    height: 100px; /* Adjust height for compact view */
+    object-fit: cover;
+    margin-right: 20px; /* Space between image and details */
+  }
+  
+  .my-motorcycles-page .product-info {
+    flex-grow: 1;
+    text-align: left;
+  }
+  
+  .my-motorcycles-page .action-buttons {
+    display: flex;
+    gap: 10px;
+    padding: 0;
+    text-align: right; /* Align buttons to the right */
+  }
+  
+  .my-motorcycles-page .edit-button, .my-motorcycles-page .deleteForm button, .my-motorcycles-page .favorite-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .my-motorcycles-page .favorite-button {
+    background-color: #28a745;
+  }
+  
+  .my-motorcycles-page .edit-button {
+    background-color: #ffc107;
+  }
+  
+  .my-motorcycles-page .deleteForm button {
+    background-color: #dc3545;
+  }
+  
+  .my-motorcycles-page .edit-button:hover, .my-motorcycles-page .deleteForm button:hover, .my-motorcycles-page .favorite-button:hover {
+    background-color: #0056b3;
+  }
+  
+  @media (max-width: 768px) {
+    .my-motorcycles-page .product-list {
+      flex-direction: column; /* Ensure vertical stacking on smaller screens */
+    }
+  
+    .my-motorcycles-page .product {
+      flex-direction: column; /* Stack elements vertically on smaller screens */
+      align-items: stretch; /* Stretch items to fill the width */
+    }
+  
+    .my-motorcycles-page .products-img {
+      width: 100%; /* Full width images on smaller screens */
+      height: auto; /* Adjust height automatically */
+      margin-right: 0; /* No margin on the right on smaller screens */
+    }
+  
+    .my-motorcycles-page .action-buttons {
+      justify-content: space-between; /* Spread buttons evenly */
+    }
+  }
+  
+  .my-motorcycles-page footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+  }
+  
