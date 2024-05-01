@@ -384,8 +384,8 @@ exports.postHelpPage = async (req, res, next) => {
         const user = await User.findByPk(userId);
         const userFullName = user.name + ' ' + user.surName;
         const userEmail = user.email;
-        await helpMail.create({ title: title, message: message , userFullName: userFullName,
-         userEmail: userEmail});
+        await helpMail.create({ title: title, message: message , name: userFullName,
+         email: userEmail});
          req.flash('error',"Email sended please check your email to response");
         res.redirect('/user/' + userId + '/help');
     } catch (error) {
