@@ -1,0 +1,37 @@
+<% comments.forEach((comment2)=>{ %>
+    <% if(comment.id===comment2.replyToComment){ %>
+      <div class="comment">
+        <p class="comment-text">
+          <%= comment2.userFullName %> : <%= comment2.comment %>
+        </p>
+        <div class="comment">
+
+        </div>
+        <% if(comment2.userId===userId) { %>
+          <form action="/delete-comment" method="post" class="delete-comment-form">
+            <input type="hidden" name="commentId" value="<%= comment2.id %>">
+            <input type="hidden" name="productId" value="<%= product.id %>">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button type="submit" class="btn delete-comment-btn">Delete</button>
+          </form>
+          <% } %>
+            <% if(isAdmin) { %>
+              <form action="/admin-delete-comment" method="post" class="delete-comment-form">
+                <input type="hidden" name="commentId" value="<%= comment2.id %>">
+                <input type="hidden" name="productId" value="<%= product.id %>">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <button type="submit" class="btn delete-comment-btn">Delete</button>
+              </form>
+              <% } }%>
+      </div>
+      <form action="/add-to-comment-to-comment" method="post" class="add-comment-form">
+        <textarea name="comment" class="comment-textarea" placeholder="Write your comment here..."></textarea>
+        <input type="hidden" name="productId" value="<%= product.id %>">
+        <input type="hidden" name="commentId" value="<%= comment2.id %>">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button type="submit" class="btn add-comment-btn">Add to comment</button>
+      </form>
+      <% }); %>
+          
+</div>
+

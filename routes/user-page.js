@@ -29,6 +29,8 @@ router.get('/user',isLogin,userController.getUserPage);
 router.post("/add-to-comment",isLogin, userController.postComment);
 router.post("/delete-comment",isLogin, userController.postDeleteComment);
 
+router.post('/add-to-comment-to-comment',isLogin, userController.postCommentToComment)
+
 router.get("/user/:userId/help",isLogin,userController.getHelpPage);
 
 router.post("/user/:userId/help",isLogin,userController.postHelpPage);

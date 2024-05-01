@@ -20,6 +20,7 @@ const authRoutes = require('./routes/auth-page');
 const userRoutes = require('./routes/user-page');
 const addProductRoutes = require('./routes/add-product');
 const adminPages = require('./routes/admin-page');
+const Admin = require('./models/admin');
 
 
 const app = express();
@@ -40,6 +41,9 @@ app.use((req, res, next) => {
             if(req.session.user){
                 const user =await User.findByPk(req.session.user.id);
                 res.locals.user = user;
+                const admin =await Admin.findByPk(req.session.user.id);
+                res.locals.admin = admin;
+
             }
             res.locals.isAuthenticated = req.session.isLoggedIn;
             res.locals.isAdminAuthenticated = req.session.isAdminLoggedIn;

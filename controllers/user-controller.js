@@ -329,6 +329,20 @@ exports.postComment = async (req, res, next) => {
         console.log(error);
     }
 }
+exports.postCommentToComment = async (req, res, next) => {
+    const comment = req.body.comment;
+    const productId = req.body.productId;
+    const commentId = req.body.commentId;
+    try {
+        const user = await User.findByPk(req.session.user.id);
+        await user.createComment({ comment: comment, replyTo: productId,
+             userFullName: user.name + ' ' + user.surName,
+            replyToComment: commentId});
+        res.redirect('/product/' + productId);
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 exports.postDeleteComment = async (req, res, next) => {
     const commentId = req.body.commentId;
