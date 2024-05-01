@@ -44,7 +44,8 @@ exports.postSignup = async (req, res, next) => {
         const adminMail = ["oguzhanceviz68@gmail.com",
             "tolgacevhan@gmail.com",
             "berk579.32@gmail.com",
-            "huseyindonmez588@gmail.com"];
+            "huseyindonmez588@gmail.com",
+            "mstf.bglm02@gmail.com"];
         if (!adminMail.includes(email)) {
             req.flash('error',
                 'You are not authorized to register as an admin');
@@ -395,7 +396,7 @@ exports.postEditProduct = async (req, res, next) => {
 }
 exports.getMails = async (req, res, next) => {
     try {
-        const mails = await HelpMail.findAll({order: [['createdAt', 'ASC']]});
+        const mails = await HelpMail.findAll({ order: [['createdAt', 'ASC']] });
         res.render('AdminPages/admin-navbar-pages/mail',
             { path: '/mails', PageTitle: 'Mails', mails: mails });
     } catch (error) {

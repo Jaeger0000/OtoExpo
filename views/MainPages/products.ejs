@@ -22,12 +22,13 @@
                         </div>
 
                         <div class="button-container">
+                            <% if(!isAdminAuthenticated){ %>
                             <form action="/favorite" method="post" class="favorite-form">
                                 <input type="hidden" name="productId" value="<%= product.id %>">
                                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                 <button type="submit" class="button favorite-button">Add to Favorite</button>
                             </form>
-
+                            <% } %>
                             <a href="/product/<%= product.id %>" class="button details-button">Product Details</a>
                         </div>
                     </div>

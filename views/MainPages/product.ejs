@@ -29,12 +29,13 @@
             <p class="product-favorite-number"><strong>Favori Number:</strong>
               <%= favoriteNumber %>
             </p>
-
+            <% if(!isAdminAuthenticated){ %>
             <form action="/favorite" method="post" class="favorite-form">
               <input type="hidden" name="productId" value="<%= product.id %>">
               <input type="hidden" name="_csrf" value="<%= csrfToken %>">
               <button type="submit" class="btn add-favorite-btn">Add to favorite</button>
             </form>
+            <% } %>
           </div>
         </div>
 
@@ -56,7 +57,7 @@
                           <div class="comment">
 
                           </div>
-                          <% if(comment2.userId===userId) { %>
+                          <% if(comment2.userId===userId && !isAdmin) { %>
                             <form action="/delete-comment" method="post" class="delete-comment-form">
                               <input type="hidden" name="commentId" value="<%= comment2.id %>">
                               <input type="hidden" name="productId" value="<%= product.id %>">
@@ -84,7 +85,7 @@
                         </div>
                   </div>
                 </div>
-                <% if(comment.userId===userId) { %>
+                <% if(comment.userId===userId && !isAdmin) { %>
                   <form action="/delete-comment" method="post" class="delete-comment-form">
                     <input type="hidden" name="commentId" value="<%= comment.id %>">
                     <input type="hidden" name="productId" value="<%= product.id %>">
