@@ -75,10 +75,14 @@ exports.getProduct =async (req, res, next) => {
             const comments = await Comment.findAll({where: {replyTo: req.params.productId}});
             const favorite = await FavoriteItem.findAll({where: {productId: req.params.productId}});
             var userId = "";
+            var adminId = "";
             if(req.session.user){
                 userId = req.session.user.id;
             }
-            const admin = await Admin.findByPk(userId);
+            if(req.session.admin){
+                adminId = req.session.admin.id;
+            }
+            const admin = await Admin.findByPk(adminId);
             var isAdmin = false;
             if(admin){
                 isAdmin = true;

@@ -41,9 +41,10 @@ app.use((req, res, next) => {
             if(req.session.user){
                 const user =await User.findByPk(req.session.user.id);
                 res.locals.user = user;
-                const admin =await Admin.findByPk(req.session.user.id);
+            }
+            if(req.session.admin){
+                const admin =await Admin.findByPk(req.session.admin.id);
                 res.locals.admin = admin;
-
             }
             res.locals.isAuthenticated = req.session.isLoggedIn;
             res.locals.isAdminAuthenticated = req.session.isAdminLoggedIn;

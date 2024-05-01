@@ -11,7 +11,7 @@
         <%- include('./includes/user-navbar'); %>   
         <main>
             <div class="container-addproduct">
-                <h1 class="h1-addproduct">Add New Car</h1>
+                <h1 class="h1-addproduct">Edit Product</h1>
                
                 <form class="form-addproduct" action="/edit-product" method="POST">
                     <div class="form-group-addproduct">
@@ -54,7 +54,6 @@
 
                     <input type="hidden" name="productId" value="<%= product.id %>">
                     <div class="form-group-addproduct">
-                        
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                         <input class="inp-sub-addproduct-button" type="submit" value="Submit">
                     </div>

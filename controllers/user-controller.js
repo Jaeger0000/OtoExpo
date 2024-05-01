@@ -6,30 +6,30 @@ const helpMail = require('../models/help-mail');
 
 const { where } = require('sequelize');
 const Comment = require('../models/comment');
-exports.getFavorite = (req, res, next) => {
-    var errormsg = req.flash('error');
+exports.getFavorite = async (req, res, next) => {
+    let errormsg = req.flash('error');
     if (errormsg.length > 0) {
         errormsg = errormsg[0];
     } else {
         errormsg = null;
     }
-    async function init() {
-        try {
-            const user = await User.findByPk(req.session.user.id);
-            const favorite = await user.getFavorite();
-            const products = await favorite.getProducts(); // üç farklı favorite böl 3 farklı değer yolla
-            res.render('UserPages/favorite', {
-                path: '/favorite',
-                error: errormsg,
-                favorites: products,
-                PageTitle: 'Favorite'
-            });
-
-        } catch (error) {
-            console.log(error);
+    try {
+        const user = await User.findByPk(req.session.user.id);
+        if (!user) {
+            throw new Error('User not found');
         }
+        const favorite = await user.getFavorite();
+        const products = await favorite.getProducts();
+        res.render('UserPages/favorite', {
+            path: '/favorite',
+            error: errormsg,
+            favorites: products,
+            PageTitle: 'Favorite'
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ error: 'An error occurred' });
     }
-    init();
 }
 
 
@@ -78,8 +78,16 @@ exports.getUser =async (req, res, next) => {
             if (user === null) {
                 return res.redirect('/user');
             }
-            if (user.id !== req.session.user.id) {
-                return res.redirect('/user');
+
+            if(req.session.user){
+                if (user.id !== req.session.user.id) {
+                    return res.redirect('/user');
+                }
+            }
+            if(req.session.admin){
+                
+                    return res.redirect('/admin');
+                
             }
             var errormsg = req.flash('error');
             if (errormsg.length > 0) {
@@ -250,27 +258,7 @@ exports.getEditMyProduct = async (req, res, next) => {
 
 }
 
-exports.postEditMyProduct = async (req, res, next) => {
-    const productId = req.body.productId;
-    const name = req.body.name;
-    const price = req.body.price;
-    const description = req.body.description;
-    const imageUrl = req.body.imageUrl;
-    try {
-        const user = await User.findByPk(req.session.user.id);
-        const cars = await user.getProducts({ where: { id: productId } });
-        const car = cars[0];
-        car.name = name;
-        car.price = price;
-        car.description = description;
-        car.imageUrl = imageUrl;
-        await car.save();
-        res.redirect('/user/' + req.session.user.id + '/my-cars');
-    } catch (error) {
-        console.log(error);
-    }
 
-}
 
 exports.postDeleteMyProduct = async (req, res, next) => {
     const productId = req.body.productId;
@@ -312,7 +300,7 @@ exports.postEditProduct = async (req, res, next) => {
         car.year = year;
         // car.imageUrl = imageUrl;
         await car.save();
-        res.redirect('/user/' + req.session.user.id + '/my-cars');
+        res.redirect('/user/' + req.session.user.id + '/my-'+ car.type + 's');
     } catch (error) {
         console.log(error);
     }
@@ -323,6 +311,7 @@ exports.postComment = async (req, res, next) => {
     const comment = req.body.comment;
     const productId = req.body.productId;
     try {
+        
         const user = await User.findByPk(req.session.user.id);
         await user.createComment({ comment: comment, replyTo: productId, userFullName: user.name + ' ' + user.surName});
         res.redirect('/product/' + productId);

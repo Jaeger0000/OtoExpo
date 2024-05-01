@@ -14,7 +14,7 @@
                             <p><%= product.kilometer %> km</p>
                         </div>
                         <div>
-                            <a class="edit-button" href="/admin/<%= user.id %>/product-edit/<%= product.id %>">Edit</a>
+                            <a class="edit-button" href="/admin/<%= admin.id %>/product-edit/<%= product.id %>">Edit</a>
                             <form action="/product-delete" method="post" class="deleteForm">
                                 <input type="hidden" name="productId" value="<%= product.id %>">
                                 <input type="hidden" name="name" value="<%= name %>">

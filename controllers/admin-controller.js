@@ -96,7 +96,7 @@ exports.postLogin = async (req, res, next) => {
             req.flash('error', "The entered password is incorrect");
             return res.redirect('/admin-login');
         }
-        req.session.user = admin;
+        req.session.admin = admin;
         req.session.isAdminLoggedIn = true;
         await sleep(1000); // delay for 1 second to update the session
         function sleep(ms) {
@@ -179,7 +179,7 @@ exports.postResetPass = async (req, res, next) => {
         }
     });
     if (!admin) {
-        req.flash('error', 'User not found');
+        req.flash('error', 'Admin not found');
         return res.redirect('/admin-login');
     }
     const passwordcrypt = bcrypt.hashSync(password, 12);
@@ -195,11 +195,11 @@ exports.getAdmin = async (req, res, next) => {
 
     try {
         const userId = req.params.UserId;
-        const user = await Admin.findByPk(userId);
-        if (user === null) {
+        const admin = await Admin.findByPk(userId);
+        if (admin === null) {
             return res.redirect('/admin');
         }
-        if (user.id !== req.session.user.id) {
+        if (admin.id !== req.session.admin.id) {
             return res.redirect('/admin');
         }
         var errormsg = req.flash('error');
@@ -208,15 +208,15 @@ exports.getAdmin = async (req, res, next) => {
         } else {
             errormsg = null;
         }
-        res.render('AdminPAges/admin-navbar-pages/user',
-            { path: 'admin/account', error: errormsg, user: user, PageTitle: 'Admin' });
+        res.render('AdminPages/admin-navbar-pages/user',
+            { path: 'admin/account', error: errormsg, admin: admin, PageTitle: 'Admin' });
     } catch (error) {
         console.log(error);
     }
 
 }
 exports.getAdminPage = (req, res, next) => {
-    const id = req.session.user.id;
+    const id = req.session.admin.id;
     res.redirect('/admin/' + id + '/account');
 }
 
@@ -224,7 +224,7 @@ exports.getAdminPage = (req, res, next) => {
 exports.postNameUpdate = async (req, res, next) => {
     const name = req.body.name;
     try {
-        const admin = await Admin.findByPk(req.session.user.id);
+        const admin = await Admin.findByPk(req.session.admin.id);
         admin.name = name;
         await admin.save();
         res.redirect('/admin');
@@ -237,7 +237,7 @@ exports.postSurnameUpdate = async (req, res, next) => {
     const surName = req.body.surName;
 
     try {
-        const admin = await Admin.findByPk(req.session.user.id);
+        const admin = await Admin.findByPk(req.session.admin.id);
         admin.surName = surName;
         await admin.save();
         res.redirect('/admin');
@@ -257,7 +257,7 @@ exports.postEmailUpdate = async (req, res, next) => {
     }
 
     try {
-        const admin = await Admin.findByPk(req.session.user.id);
+        const admin = await Admin.findByPk(req.session.admin.id);
         admin.email = email;
         await admin.save();
         res.redirect('/admin');
@@ -271,23 +271,23 @@ exports.postPasswordUpdate = async (req, res, next) => {
     const oldpassword = req.body.oldPassword;
     const password = req.body.password;
     const cfrmPassword = req.body.cfrmPassword;
-    if (bcrypt.compareSync(oldpassword, req.session.user.password) === false) {
+    if (bcrypt.compareSync(oldpassword, req.session.admin.password) === false) {
         req.flash('error',
             'The entered password is incorrect');
-        return res.redirect('/user');
+        return res.redirect('/admin');
     }
     if (password !== cfrmPassword) {
         req.flash('error',
             'Passwords do not match');
-        return res.redirect('/user');
+        return res.redirect('/admin');
     }
 
     try {
-        const admin = await Admin.findByPk(req.session.user.id);
+        const admin = await Admin.findByPk(req.session.admin.id);
         const passwordcrypt = bcrypt.hashSync(password, 12);
         admin.password = passwordcrypt;
         await admin.save();
-        req.session.user = admin;
+        req.session.admin = admin;
         res.redirect('/admin');
     }
     catch (error) {
@@ -298,15 +298,6 @@ exports.postPasswordUpdate = async (req, res, next) => {
 
 exports.getAllCars = async (req, res, next) => {
     try {
-        const userId = req.params.UserId;
-        const userSId = req.session.user.id;
-        const user = await User.findByPk(userId);
-        if (user === null) {
-            return res.redirect('/user/' + userSId + '/my-cars');
-        }
-        if (user.id !== req.session.user.id) {
-            return res.redirect('/user/' + userSId + '/my-cars');
-        }
 
         const products = await Products.findAll({ where: { type: 'car' } });
         res.render('AdminPages/admin-navbar-pages/all-cars',
@@ -317,15 +308,6 @@ exports.getAllCars = async (req, res, next) => {
 }
 exports.getAllMotorcycles = async (req, res, next) => {
     try {
-        const userId = req.params.UserId;
-        const userSId = req.session.user.id;
-        const user = await User.findByPk(userId);
-        if (user === null) {
-            return res.redirect('/user/' + userSId + '/my-motorcycles');
-        }
-        if (user.id !== req.session.user.id) {
-            return res.redirect('/user/' + userSId + '/my-motorcycles');
-        }
         const products = await Products.findAll({ where: { type: 'motorcycle' } });
         res.render('AdminPages/admin-navbar-pages/all-motorcycles',
             { path: '/all-motorcycles', products: products, name: 'motorcycles', PageTitle: 'All Motorcycles' });
@@ -342,7 +324,7 @@ exports.postDeleteProduct = async (req, res, next) => {
         const product = products[0];
         await product.destroy();
         await product.save();
-        res.redirect('/admin/' + req.session.user.id + '/all-' + name);
+        res.redirect('/admin/all-' + name);
     } catch (error) {
         console.log(error);
     }
@@ -389,7 +371,7 @@ exports.postEditProduct = async (req, res, next) => {
         car.year = year;
         // car.imageUrl = imageUrl;
         await car.save();
-        res.redirect('/user/' + req.session.user.id + '/my-cars');
+        res.redirect('/admin/all-'+ car.type + 's');
     } catch (error) {
         console.log(error);
     }
@@ -412,7 +394,7 @@ exports.emailDelete = async (req, res, next) => {
         const email = emails[0];
         await email.destroy();
         await email.save();
-        res.redirect('/admin/' + req.session.user.id + '/mails');
+        res.redirect('/admin/' + req.session.admin.id + '/mails');
     } catch (error) {
         console.log(error);
     }

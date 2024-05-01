@@ -4,6 +4,8 @@ const authController = require('../controllers/auth-controller');
 
 const isNotLogin = require('../middleware/isNotLogin');
 const isLogin = require('../middleware/isLogin');
+const isAdminLogin = require('../middleware/isAdminLogin');
+
 
 const router = express.Router();
 

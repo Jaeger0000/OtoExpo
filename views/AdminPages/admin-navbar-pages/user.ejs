@@ -19,19 +19,19 @@
                                 <% } %>
                                     <h2 class="signupH2">Admin Settings</h2>
                                     <form action="/admin-name-update" method="post">
-                                        <label for="name">Name : <%= user.name %></label>
+                                        <label for="name">Name : <%= admin.name %></label>
                                         <input type="text" id="name" name="name" required>
                                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                         <input type="submit" value="Change Name">
                                     </form>
                                     <form action="/admin-surname-update" method="post">
-                                        <label for="name">Surname: <%= user.surName %></label>
+                                        <label for="name">Surname: <%= admin.surName %></label>
                                         <input type="text" name="surName" required>
                                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                         <input type="submit" value="Change Surname">
                                     </form>
                                     <form action="/admin-email-update" method="post">
-                                        <label for="name">Email: <%= user.email %></label>
+                                        <label for="name">Email: <%= admin.email %></label>
                                         <input type="email" name="email"required>
                                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                         <input type="submit" value="Change Email">
