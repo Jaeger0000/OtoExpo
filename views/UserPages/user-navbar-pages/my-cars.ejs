@@ -21,8 +21,11 @@
                         <p>Description: <%= product.description %></p>
                     </div>
                     <div class="action-buttons">
-                        <a href="/edit-my-product/<%= product.id %>" class="edit-button">Edit</a>
-                        <form action="/delete-my-product/<%= product.id %>" method="POST" class="deleteForm">
+                        <a href="/user/<%= user.id %>/product-edit/<%= product.id %>" class="edit-button">Edit</a>
+                        <form action="/my-product/delete" method="POST" class="deleteForm">
+                            <input type="hidden" name="productId" value="<%= product.id %>">
+                            <input type="hidden" name="name" value="<%= name %>">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                             <button type="submit" class="delete-button">Delete</button>
                         </form>
                     </div>

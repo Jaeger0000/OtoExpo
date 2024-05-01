@@ -12,7 +12,7 @@ router.post('/delete-favorite',isLogin,userController.postDeleteFavorite);
 router.get('/user/:UserId/my-cars',isLogin,userController.getMyCars);
 router.get('/user/:UserId/my-motorcycles',isLogin,userController.getMyMotorcycles);
 router.get('/user/:UserId/product-edit/:productId',isLogin,userController.getEditMyProduct);
-router.post('/myproduct-delete',isLogin,userController.postDeleteMyProduct);
+router.post('/my-product/delete',isLogin,userController.postDeleteMyProduct);
 
 
 router.post('/edit-product',isLogin,userController.postEditProduct);
