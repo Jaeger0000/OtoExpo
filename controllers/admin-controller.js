@@ -394,7 +394,7 @@ exports.emailDelete = async (req, res, next) => {
         const email = emails[0];
         await email.destroy();
         await email.save();
-        res.redirect('/admin/' + req.session.admin.id + '/mails');
+        res.redirect('/admin/mails');
     } catch (error) {
         console.log(error);
     }
