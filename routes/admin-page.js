@@ -13,6 +13,8 @@ router.post('/admin-signup',isNotLogin,adminController.postSignup);
 router.get('/admin-login',isNotLogin,adminController.getLogin);
 router.post('/admin-login',isNotLogin,adminController.postLogin);
 
+router.post('/admin-logout',isAdminLogin,adminController.postLogout);
+
 router.get('/admin-forget-password',isNotLogin,adminController.getForgetPass);
 router.post('/admin-forget-password',isNotLogin,adminController.postForgetPass);
 

@@ -1,41 +1,50 @@
 <nav>
-<div class="navbar">
-  <ul>
-    <li>
-      <div class="logo"></div>
-    </li>
-    <li><a href="/" class="<%= path==='/' ? 'active': '' %>">Home</a></li>
-    <li class="dropdown">
-      <a href="/products" class="dropbtn" class="<%= path==='/products' ? 'active': '' %>">Products</a>
-      <div class="dropdown-content">
-        <a href="/products/cars">Cars</a>
-        <a href="/products/motorcycles">Motorcycles</a>
-      </div>
+  <div class="navbar">
+    <ul>
+      <li>
+        <div class="logo"></div>
+      </li>
+      <li><a href="/" class="<%= path==='/' ? 'active': '' %>">Home</a></li>
+      <li class="dropdown">
+        <a href="/products" class="dropbtn" class="<%= path==='/products' ? 'active': '' %>">Products</a>
+        <div class="dropdown-content">
+          <a href="/products/cars">Cars</a>
+          <a href="/products/motorcycles">Motorcycles</a>
+        </div>
       </li>
       <li><a href="/contact">Contact</a></li>
-    <li><a href="/about">About</a></li>
+      <li><a href="/about">About</a></li>
       <% if(isAuthenticated){ %>
-    <li><a href="/favorite">Favorites</a></li>
-    <li><a href="/add-product">Add Products</a></li>
-    <li style="float:right"><form action="/logout" method="post" >
-      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-      <input type="submit" value="Log Out"></form></li>
-    <li style="float:right">
-      <a href="/user/<%= user.id %>/account" class="<%= path==='user/account' ? 'active': '' %>"><%= user.name %></a>
-    </li>
-    <% }else if(isAdminAuthenticated){ %>
-      <li style="float:right"><form action="/logout" method="post" >
-        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-        <input type="submit" value="Log Out"></form></li>
-      <li style="float:right">
-        <a href="/admin/<%= admin.id %>/account" class="<%= path==='user/account' ? 'active': '' %>">Admin: <%= admin.name %></a>
-      </li>
-      
-      <% }else { %>
-    <li style="float:right"><a href="/login" class="<%= path==='/login' ? 'active' : '' %>">Login</a></li>
-    <li style="float:right"><a href="/signup" class="<%= path==='/signup' ? 'active' : '' %>">Signup</a></li>
-    <% } %>
-    
-  </ul>
-</div>
+        <li><a href="/favorite">Favorites</a></li>
+        <li><a href="/add-product">Add Products</a></li>
+        <li style="float:right">
+          <form action="/logout" method="post">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <input type="submit" value="Log Out">
+          </form>
+        </li>
+        <li style="float:right">
+          <a href="/user/<%= user.id %>/account" class="<%= path==='user/account' ? 'active': '' %>">
+            <%= user.name %>
+          </a>
+        </li>
+        <% }else if(isAdminAuthenticated){ %>
+          <li style="float:right">
+            <form action="/admin-logout" method="post">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <input type="submit" value="Log admin Out">
+            </form>
+          </li>
+          <li style="float:right">
+            <a href="/admin/<%= admin.id %>/account" class="<%= path==='user/account' ? 'active': '' %>">Admin: <%=
+                admin.name %></a>
+          </li>
+
+          <% }else { %>
+            <li style="float:right"><a href="/login" class="<%= path==='/login' ? 'active' : '' %>">Login</a></li>
+            <li style="float:right"><a href="/signup" class="<%= path==='/signup' ? 'active' : '' %>">Signup</a></li>
+            <% } %>
+
+    </ul>
+  </div>
 </nav>

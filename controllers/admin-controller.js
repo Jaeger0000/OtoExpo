@@ -412,3 +412,10 @@ exports.postDeleteComment = async (req, res, next) => {
         console.log(error);
     }
 }
+
+exports.postLogout = async (req, res, next) => {
+    await req.session.destroy((err) => {
+        console.log(err);
+        res.redirect('/');
+    });
+}
