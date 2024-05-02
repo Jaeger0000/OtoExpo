@@ -322,6 +322,17 @@ exports.postDeleteProduct = async (req, res, next) => {
     try {
         const products = await Products.findAll({ where: { id: productId } });
         const product = products[0];
+        const deletePath = 'public' + product.imageUrl;
+        fs.stat(deletePath, function (err, stats) {
+            console.log(stats);//here we got all information of file in stats variable
+            if (err) {
+                return console.error(err);
+            }
+            fs.unlink(deletePath, function (err) {
+                if (err) return console.log(err);
+                console.log('file deleted successfully');
+            });
+        });
         await product.destroy();
         await product.save();
         res.redirect('/admin/all-' + name);
