@@ -1,7 +1,13 @@
+body {
+    background-image: url('https://kultur.istanbul/gorsel/2023/09/klasik-arabalar.jpg'); 
+    background-size: cover; 
+    background-position: center; 
+}
+
 .container-left-navbar {
     display: flex;
     height: 120vh;
-    
+
 }
 
 .navbar-left {
@@ -22,22 +28,24 @@
     padding: 0;
     overflow: hidden;
     margin-bottom: 10px;
-    
+
 }
-.navbar-left-a{
+
+.navbar-left-a {
     display: block;
     color: white;
     text-align: center;
     padding: 14px 16px;
-    text-decoration: none; 
+    text-decoration: none;
 
 }
+
 .navbar-left-a:hover {
     color: white;
     background-color: #555;
     padding: 14px 16px;
     text-decoration: none;
-  }
+}
 
 .navbar-left-a.active {
     color: white;
@@ -46,12 +54,13 @@
     padding: 14px 16px;
     text-decoration: none;
     margin-bottom: 10px;
-  }
+}
 
 .content-left {
     flex-grow: 1;
     padding: 20px;
 }
+
 .edit-button {
     background-color: #4caf50;
     color: #fff;
@@ -61,8 +70,8 @@
     margin-bottom: 20px;
     cursor: pointer;
     transition: background-color 0.3s;
-  }
-  
-  .edit-button:hover {
+}
+
+.edit-button:hover {
     background-color: #45a049;
 }
