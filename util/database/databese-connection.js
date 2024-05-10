@@ -38,6 +38,4 @@ async function  init() {
         console.log(error);
     }
 }
-module.exports = init({alter: true});
-
-sequelize.sync({alter: true});
+module.exports = init();

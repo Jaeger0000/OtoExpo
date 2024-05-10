@@ -1,51 +1,51 @@
 <%- include('../../includes/head'); %>
-    <link rel="stylesheet" href="/css/navBarCss.css">
-    <link rel="stylesheet" href="/css/signup.css">
-    <link rel="stylesheet" href="/css/userSetting.css">
+<link rel="stylesheet" href="/css/navBarCss.css">
+<link rel="stylesheet" href="/css/signup.css">
+<link rel="stylesheet" href="/css/userSetting.css">
+</head>
 
-    </head>
-
-    <body>
-        <%- include('../../includes/nav-bar'); %>
-            <main>
-                <%- include('./includes/user-navbar'); %>
-                    <div class="content-left">
-                        <!-- Sayfa içeriği buraya gelecek -->
-                        <div class="container">
-                            <% if(error){ %>
-                                <h4 class="error-message">
-                                    <%= error %>
-                                </h4>
-                                <% } %>
-                                    <h2 class="signupH2">Admin Settings</h2>
-                                    <form action="/admin-name-update" method="post">
-                                        <label for="name">Name : <%= admin.name %></label>
-                                        <input type="text" id="name" name="name" required>
-                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                                        <input type="submit" value="Change Name">
-                                    </form>
-                                    <form action="/admin-surname-update" method="post">
-                                        <label for="name">Surname: <%= admin.surName %></label>
-                                        <input type="text" name="surName" required>
-                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                                        <input type="submit" value="Change Surname">
-                                    </form>
-                                    <form action="/admin-email-update" method="post">
-                                        <label for="name">Email: <%= admin.email %></label>
-                                        <input type="email" name="email"required>
-                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                                        <input type="submit" value="Change Email">
-                                    </form>
-                                    <form action="/admin-password-update" method="post">
-                                        <input type="password" name="oldPassword" placeholder="Old Password" required>
-                                        <input type="password" name="password" placeholder="New Password" required>
-                                        <input type="password" name="cfrmPassword" placeholder="Confirm Password" required>
-                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                                        <input type="submit" value="Change Password">
-                                    </form>
-                        </div>
+<body>
+    <%- include('../../includes/nav-bar'); %>
+    <main>
+        <%- include('./includes/user-navbar'); %>
+        <div class="content-left">
+            <div class="container">
+                <% if(error){ %>
+                    <h4 class="error-message">
+                        <%= error %>
+                    </h4>
+                <% } %>
+                <h2 class="signupH2">User Settings</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" value="<%= admin.name %>" required>
+                        <button formaction="/name-update" formmethod="post">Change Name</button>
                     </div>
-
-    </body>
-
-    </html>
+                    <div class="form-group">
+                        <label for="surname">Surname:</label>
+                        <input type="text" id="surname" name="surname" value="<%= admin.surName %>" required>
+                        <button formaction="/surname-update" formmethod="post">Change Surname</button>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" value="<%= admin.email %>" required>
+                        <button formaction="/email-update" formmethod="post">Change Email</button>
+                    </div>
+                    <div class="form-group">
+                        <label>Old Password:</label>
+                        <input type="password" id="oldPassword" name="oldPassword" placeholder="Old Password" required>
+                        <label>New Password:</label>
+                        <input type="password" id="password" name="password" placeholder="New Password" required>
+                        <label>Confirm Password:</label>
+                        <input type="password" id="cfrmPassword" name="cfrmPassword" placeholder="Confirm Password" required>
+                        <button formaction="/password-update" formmethod="post">Change Password</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

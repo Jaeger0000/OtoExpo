@@ -7,71 +7,187 @@ body {
 .container-left-navbar {
     display: flex;
     height: 120vh;
-
-}
-
-.navbar-left {
+  }
+  
+  .navbar-left {
     background-color: black;
-    color: #fff;
+    color: white;
     width: 200px;
     height: 100%;
     box-sizing: border-box;
-}
-
-.navbar-left ul {
+  }
+  
+  .navbar-left ul {
     list-style-type: none;
-}
-
-.navbar-left ul li {
-    list-style-type: none;
+  }
+  
+  .navbar-left ul li {
     margin: 0;
     padding: 0;
     overflow: hidden;
     margin-bottom: 10px;
-
-}
-
-.navbar-left-a {
+  }
+  
+  .navbar-left-a {
     display: block;
     color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-
-}
-
-.navbar-left-a:hover {
-    color: white;
+  }
+  
+  .navbar-left-a:hover {
     background-color: #555;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-.navbar-left-a.active {
-    color: white;
+  }
+  
+  .navbar-left-a.active {
     background-color: #555;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
     margin-bottom: 10px;
-}
-
-.content-left {
+  }
+  
+  .content-left {
     flex-grow: 1;
     padding: 20px;
-}
-
-.edit-button {
+  }
+  
+  .edit-button {
     background-color: #4caf50;
-    color: #fff;
+    color: white;
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
     margin-bottom: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  }
+  
+  .edit-button:hover {
+  background-color: #45a049;
+  }
+  
+  .error-message {
+  text-align: center;
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  }
+  
+  .success-message {
+  text-align: center;
+  color: green;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  }
+  
+  .logo {
+  width: 120px;
+  height: 60px;
+  background-image: url('../images/logo.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  }
+  
+  .user-name-size {
+  font-size: 20px;
+  color: white;
+  padding: 14px 16px;
+  text-align: center;
+  text-decoration: none;
+  }
+  
+
+/* Styling for form inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px; /* Increased bottom margin */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
 }
 
-.edit-button:hover {
-    background-color: #45a049;
+/* Styling for submit buttons */
+input[type="submit"] {
+  width: 100%;
+  background-color: black;
+  color: white;
+  padding: 15px;
+  margin-top: 15px; /* Adds space above the button */
+  margin-bottom: 30px; /* Adds more space below the button */
+  border: none;
+  border-radius: 5px;
+  font-size: 120%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+  background-color: #333;
+}
+
+/* If you use labels and want to adjust their margins as well */
+label {
+  display: block;
+  margin-bottom: 5px; /* Adds space below the label */
+}
+
+/* To ensure the container has sufficient padding */
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    flex: 1;
+    padding: 10px;
+}
+
+.form-group label,
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group button {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+/* Adjusting for smaller screens */
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
 }

@@ -1,18 +1,15 @@
 body {
   background-image: url('https://img-s1.onedio.com/id-5406e18bc62a80e52af57780/rev-0/raw/s-2075e5a29881f19f4183ac2ecf70e5d5ccba7b14.jpg');
-  background-size: cover; 
-  background-position: center; 
-  background-repeat: no-repeat; 
-  z-index: 1; 
-  animation: fadeIn 0.5s ease-in-out; 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+  animation: fadeIn 0.5s ease-in-out;
 }
-
-
 
 .container {
   max-width: 400px;
   margin: 50px auto;
-  margin-left: 50px;
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 5px;
@@ -22,12 +19,13 @@ body {
 
 @keyframes fadeIn {
   from {
-    opacity: 0; 
+    opacity: 0;
   }
   to {
     opacity: 1;
   }
 }
+
 @keyframes slideInFromRight {
   0% {
     transform: translateX(100%);
@@ -59,17 +57,17 @@ input[type="password"] {
 input[type="submit"] {
   width: 100%;
   background-color: black;
-  color: #fff;
+  color: white;
   padding: 15px;
   border: none;
   font-size: 120%;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 input[type="submit"]:hover {
   background-color: #333;
-  padding: 15px;
 }
 
 .text-center {
