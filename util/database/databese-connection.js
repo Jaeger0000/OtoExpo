@@ -39,5 +39,3 @@ async function  init() {
     }
 }
 module.exports = init();
-
-sequelize.sync({alter: true});

@@ -58,16 +58,156 @@ a:hover {
   display: flex;
   align-items: center;
   height: 100vh;
-  background: url('../images/car1.jpg') center / cover no-repeat;
   padding: 0 10%;
+  background-image: url('https://i.pinimg.com/originals/bf/23/f9/bf23f90a27e6495fce74f24e44763292.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.footer {
-  background-color: #081b29;
+.card {
+  background-color: white;
+  height: 400px;
+  width: 300px;
+  position: relative;
+  top: 8%;
+  left: 10%;
+  background: #000000;
+  transition: all 0.4s;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 5px #ededed;
+  font-size: 30px;
+  font-weight: 900;
+  animation: fadeIn 2s forwards;
+}
+
+.card:hover {
+  border-radius: 15px;
+  cursor: pointer;
+  transform: scale(1.2);
+  box-shadow: 0px 0px 10px 5px #000000;
+  background: #ededed;
+}
+
+.first-content {
+  height: 100%;
+  width: 100%;
+  transition: all 0.4s;
+  margin-left:0.8rem ;
+  display: flex;
+  justify-content: center; /* Dikey olarak ortala */
+  align-items: center; /* Yatay olarak ortala */
+  opacity: 1;
+  border-radius: 15px;
+}
+
+.second-content {
+  height: 0%;
+  width: 100%;
+  opacity: 0;
+  color: #081b29;
+  display: flex;
+  justify-content: center; /* Dikey olarak ortala */
+  align-items: center; /* Yatay olarak ortala */
+  border-radius: 15px;
+  transition: all 0.4s;
+  font-size: 0px;
+  transform: rotate(90deg) scale(-1);
+}
+
+.card:hover .first-content {
+  height: 0px;
+  opacity: 0;
+}
+
+
+.card:hover .second-content {
+  opacity: 1;
+  height: 100%;
+  font-size: 1rem;
+  transform: rotate(0deg);
+}
+
+ .btn-box {
+  display: flex;
+  justify-content: space-between;
+  width: 345px;
+  height: 50px;
+  position: relative;
+  left: 650px;
+}
+
+ .btn-box a {
+  overflow: hidden;
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 100%;
+  background: #000000;
+  border: 2px solid #000000;
+  border-radius: 8px;
+  font-size: 19px;
   color: #ededed;
+  font-weight: 600;
+  letter-spacing: 1px;
+  z-index: 1;
+}
+
+.btn-box a:nth-child(2) {
+  background-color: #000000;
+  color: #ededed;
+}
+
+.btn-box a:nth-child(2)::before {
+  background-color: #ededed;
+}
+
+.btn-box a:nth-child(2):hover {
+  color: #000000;
+}
+
+.btn-box a::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: #ededed;
+  z-index: -1;
+  transition: .5s;
+}
+
+.btn-box a:hover::before {
+  width: 100%;
+}
+.btn-box a:hover{
+  color: #000000;
+}
+.content{
+  background-color: #000000;
+  height: 500px;
+}
+.logo-grid{
+  width: 50%;
+  height: 400px;
+  position: relative;
+  bottom: 320px;
+  left: 45%;
+  
+}
+
+
+
+
+.footer {
+  background-color: #ededed;
+  color: #081b29;
   padding: 20px 0;
   display: flex;
   justify-content: center;
+  height: 400px;
 }
 
 .footer-content {
@@ -77,8 +217,13 @@ a:hover {
   max-width: 1200px;
 }
 
+.footer-section{
+  margin: auto;
+  padding: auto;
+}
+
 .footer-section h4 {
-  color: #00abf0;
+  color: #000000;
   margin-bottom: 10px;
 }
 
@@ -89,7 +234,8 @@ a:hover {
 
 .footer-section li {
   margin-bottom: 5px;
-  color: #ededed;
+  color: #000000;
+  font-weight: 200;
 }
 
 .footer-socials {
@@ -102,11 +248,11 @@ a:hover {
 .social-icon {
   display: inline-block;
   margin: 0 10px;
-  color: #00abf0;
+  color: #000000;
   font-size: 24px;
 }
 
 .social-icon:hover {
-  color: #ededed;
+  color: #636363;
   transition: color 0.3s ease;
 }

@@ -9,19 +9,34 @@
 </head>
 <body>
     <section class="home">
-        <!-- Home section content -->
+        <% if(!isAuthenticated){ %>
+        <div class="btn-box">
+            <a href="/login">Login</a>
+            <a href="/signup">Sign up</a>
+        </div>
+        <% } %>
     </section>
+    
+  
     <section class="content">
+        <div class="card">
+            <div class="first-content">
+              <span>Welcome to <br> Oto Expo <br> Car Selling Website</span>
+            </div>
+            <div class="second-content">
+          <span>Innovation, <br>Comfort and Safety,<br> Unite at Oto Expo</span>
+            </div>
+            </div>
         <div class="logo-grid">
             <img src="images/img1.png" alt="Logo 1">
             <img src="images/img2.png" alt="Logo 2">
-            <img src="images/img3.png" alt="Logo 3">
+            <img src="images/pngwing.com.png" alt="Logo 3">
             <img src="images/img4.png" alt="Logo 4">
             <img src="images/img5.png" alt="Logo 5">
             <img src="images/img6.png" alt="Logo 6">
             <img src="images/img7.png" alt="Logo 7">
             <img src="images/img8.png" alt="Logo 8">
-            <img src="images/img9.png" alt="Logo 9">
+            <img src="images/maserati.png" alt="Logo 9">
             <img src="images/img10.png" alt="Logo 10">
             <img src="images/img11.png" alt="Logo 11">
             <img src="images/img12.png" alt="Logo 12">

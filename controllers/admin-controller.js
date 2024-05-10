@@ -7,6 +7,7 @@ const Comment = require('../models/comment');
 const mailSend = require('../util/mail/mail-send');
 const crypto = require('crypto');
 const { Op } = require('sequelize');
+const fs = require("fs");
 
 exports.getSignup = (req, res, next) => {
     var errormsg = req.flash('error');
