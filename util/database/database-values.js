@@ -6,7 +6,7 @@
 exports.host = 'localhost';
 exports.user = 'root';
 exports.password = 'Vnyp3756;';
-exports.database = 'otoexpo-databese';
+exports.database = 'otoexpo-database';
 
 // exports.host = 'database-1.cfu28qmkc2bx.us-east-1.rds.amazonaws.com';
 // exports.user = 'admin';
