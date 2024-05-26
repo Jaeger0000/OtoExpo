@@ -68,6 +68,12 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
   background-color: #333;
+  padding: 15px;
+  border: none;
+  font-size: 120%;
+  border-radius: 5px;
+  cursor: pointer;
+ 
 }
 
 .text-center {
