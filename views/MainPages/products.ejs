@@ -18,7 +18,12 @@
                             <h2 class="product-name"><%= product.name || 'Product Name' %></h2>
                             <p class="product-price">Price: $<%= product.price %></p>
                             <p class="product-kilometer">Kilometer: <%= product.kilometer %> km</p>
-                            <p class="product-description">Description: <%= product.announce_details || 'No details provided' %></p>
+                            <% if(product.announce_details.length > 50 ){ 
+                                var prDetail = product.announce_details.slice(0, 50); %>
+                            <p class="product-description">Description: <%= prDetail || 'No details provided' %>...</p>
+                            <% } else{ %>
+                                <p class="product-description">Description: <%= product.announce_details || 'No details provided' %></p>
+                                <% } %>
                         </div>
 
                         <div class="button-container">
