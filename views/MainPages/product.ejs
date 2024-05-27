@@ -32,9 +32,9 @@
             <p class="product-location"><strong>Location:</strong>
               <%= product.adress %>
             </p>
-            <p class="product-description"><strong>Description:</strong>
+            <!-- <p class="product-description"><strong>Description:</strong>
               <%= product.announce_details %>
-            </p>
+            </p> -->
             <p class="product-favorite-number"><strong>Favori Number:</strong>
               <%= favoriteNumber %>
             </p>
@@ -47,6 +47,16 @@
             <% } %>
           </div>
         </div>
+
+  <div class="description-box">
+    <h2 class="product-description-title">Description</h2>
+    <p class="product-description"><%= product.announce_details %></p>
+  </div>
+    
+        <div class="comments-section">
+          <!-- Comments section code remains unchanged -->
+        </div>
+    
 
         <div class="comments-section">
           <% if(comments.length> 0 ){ %>
