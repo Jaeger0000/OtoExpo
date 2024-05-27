@@ -14,8 +14,7 @@
             <a href="/login">Login</a>
             <a href="/signup">Sign up</a>
         </div>
-        <% } %>
-        <% if(!isAdminAuthenticated) { %>
+        <% }  else if(!isAdminAuthenticated) { %>
             <div class="btn-box">
                 <a href="/login">Login</a>
                 <a href="/signup">Sign up</a>
