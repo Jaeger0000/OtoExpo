@@ -275,3 +275,30 @@ a:hover {
 .contact-form button:hover {
     background: #4cae4c;
 }
+
+.description-box {
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Ensures content is centered horizontally */
+}
+
+.product-description-title {
+    font-size: 24px; /* Larger font size for the title */
+    color: #333; /* Dark color for emphasis */
+    margin-bottom: 10px; /* Space below the title */
+    width: 100%; /* Ensures the title stretches across the box */
+    text-align: center; /* Centers the title text */
+}
+
+.product-description {
+    font-size: 18px; /* Adjust size as needed */
+    text-align: center; /* Ensures description text is centered */
+    margin-top: 10px;
+    width: 100%; /* Ensures the text stretches across the box */
+}
